@@ -1,6 +1,3 @@
-# rosco_verilog
-Verilog implementation of the rosco_m68k glue logic
-=======
 # Rosco Verilog Project
 
 This project uses Icarus Verilog for simulation and synthesis of a Verilog definition of the rosco_m68k GALasm files.
