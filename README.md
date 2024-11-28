@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # rosco_verilog
 Verilog implementation of the rosco_m68k glue logic
 =======
@@ -23,4 +22,3 @@ This oce is wip .. at time of writing it doesn't do much !
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
->>>>>>> 38a7d87 (initial commit)
