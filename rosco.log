@@ -1,0 +1,69 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2024  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.47 (git sha1 647d61dd9, clang++ 16.0.0 -fPIC -O3)
+
+yosys> read_liberty -lib /Users/malcolm/atf15xx_yosys/cells.lib
+
+1. Executing Liberty frontend: /Users/malcolm/atf15xx_yosys/cells.lib
+Imported 102 cell types from liberty file.
+
+yosys> read_verilog rosco.v
+
+2. Executing Verilog-2005 frontend: rosco.v
+Parsing Verilog input from `rosco.v' to AST representation.
+Generating RTLIL representation for module `\rosco'.
+Successfully finished Verilog frontend.
+
+yosys> stat
+
+3. Printing statistics.
+
+=== rosco ===
+
+   Number of wires:                 31
+   Number of wire bits:             53
+   Number of public wires:          31
+   Number of public wire bits:      53
+   Number of ports:                 29
+   Number of port bits:             51
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  2
+     AddressDecoder                  1
+     Glue                            1
+
+
+yosys> tribuf
+4. Executing TRIBUF pass.
+
+yosys> stat
+
+5. Printing statistics.
+
+=== rosco ===
+
+   Number of wires:                 31
+   Number of wire bits:             53
+   Number of public wires:          31
+   Number of public wire bits:      53
+   Number of ports:                 29
+   Number of port bits:             51
+   Number of memories:               0
+   Number of memory bits:            0
+   Number of processes:              0
+   Number of cells:                  2
+     AddressDecoder                  1
+     Glue                            1
+
+
+yosys> synth -flatten -noabc -top rosco
+6. Executing SYNTH pass.
+
+6.1. Executing HIERARCHY pass (managing design hierarchy).
+
+6.1.1. Analyzing design hierarchy..

@@ -4,30 +4,22 @@
 
 `default_nettype none
 
-//ATF: 1504
-//OPT: -device PLCC44
-//OPT: -strategy pin_keep on
-//PIN: CHIP "top" ASSIGNED TO PLCC44
-//PIN i_A0 :22
-//PIN i_DS_n : 23
-//PIN o_UDS_n : 24
-
 module CPUglue(
-	//input i_CLK,
+	input i_CLK,
 	input i_A0,
 	input i_DS_n,
-	//input [1:0] i_SIZ,
-	//input i_RESET_n,
+	input [1:0] i_SIZ,
+	input i_RESET_n,
 	
 	output o_UDS_n,
-	//output o_LDS_n, 
-	//output o_E
+	output o_LDS_n, 
+	output o_E
 	);
 	
-	//reg [3:0] counter;
+	reg [3:0] counter;
 
-	assign o_UDS_n = ~(~i_DS_n && ~i_A0);
-	//assign o_LDS_n = ~((~i_DS_n && ~i_A0) || (~i_DS_n && (~i_SIZ[1:0] == 2'b10)));
+	assign o_UDS_n = !(!i_DS_n && !i_A0);
+	assign o_LDS_n = !((!i_DS_n && !i_A0) || (!i_DS_n && !i_SIZ[0:0]) || (!i_DS_n && i_SIZ[1:1]));
 
 	// set o_E
 	// according the datasheet, a single period of clock E 
@@ -35,21 +27,21 @@ module CPUglue(
 	//
 	// I dont understnad that 6/4 ?? .. will just count 10 cycles ..
 
-	//reg trigger = 1'b0;
+	reg trigger = 1'b0;
 
-	//always @(posedge i_CLK) begin
-		//if (~i_RESET_n) begin
-			//counter <= 4'b0;
-			//trigger <= 1'b0;
-		//end else if (counter == 10) begin
-			//counter <= 4'b0;
-			//trigger <= 1'b1;
-		//end else begin 
-			//counter <= counter + 1;
-			//trigger <= 1'b0;
-		//end 
-	//end
+	always @(posedge i_CLK) begin
+		if (!i_RESET_n) begin
+			counter <= 4'b0;
+			trigger <= 1'b0;
+		end else if (counter == 10) begin
+			counter <= 4'b0;
+			trigger <= 1'b1;
+		end else begin 
+			counter <= counter + 1;
+			trigger <= 1'b0;
+		end 
+	end
 
-	//assign o_E = trigger;
+	assign o_E = trigger;
 
 endmodule

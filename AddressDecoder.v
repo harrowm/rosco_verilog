@@ -13,6 +13,7 @@ module AddressDecoder(
 	input i_AS_n,
 	input i_RW,
 	input i_LGEXP_n,
+	output PPDTACK,  // has to be an output for the tri-state logic to work
 	output o_DTACK_n,
 	output o_WR,	
 	output o_EVENRAM_n,
@@ -37,9 +38,7 @@ module AddressDecoder(
 	
 	assign o_WR = !i_RW;
 	
-	// wire PPDTACK = (!i_CPUSP_n && (!o_EVENROM_n || !o_ODDROM_n || !o_EVENRAM_n|| !o_ODDRAM_n || (!i_LGEXP_n && !o_EXPSEL_n)));
-	// assign o_DTACK_n = PPDTACK ? 1'b0 : 1'bZ;
-
-	assign o_DTACK_n (!i_CPUSP_n && (!o_EVENROM_n || !o_ODDROM_n || !o_EVENRAM_n|| !o_ODDRAM_n || (!i_LGEXP_n && !o_EXPSEL_n)))  ? 1'b0 : 1'bZ;
+	assign PPDTACK = !i_CPUSP_n && (!o_EVENROM_n || !o_ODDROM_n || !o_EVENRAM_n || !o_ODDRAM_n || (!i_LGEXP_n && !o_EXPSEL_n));
+	assign o_DTACK_n = PPDTACK ? 1'b0 : 1'bZ;
 
 endmodule

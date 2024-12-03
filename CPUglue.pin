@@ -1,0 +1,18 @@
+CHIP "CPUglue" ASSIGNED TO AN PLCC44
+i_DS_n					: 12
+i_A0					: 11
+i_SIZ_0					: 9
+i_SIZ_1					: 8
+TDI					: 7
+id00019					: 610
+o_UDS_n					: 6
+id00018					: 612
+id00017					: 613
+o_E					: 5
+id00020					: 615
+o_LDS_n					: 4
+i_RESET_n					: 21
+TMS					: 13
+TCK					: 32
+TDO					: 38
+i_CLK					: 43

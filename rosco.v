@@ -47,7 +47,8 @@ module rosco(
 	output o_DUASEL_n,
 	output o_RUNLED,
 	output o_DUIACK_n,
-	output o_E
+	output o_E,
+	output PPDTACK
 );
 
 // interupt selector
@@ -66,7 +67,8 @@ AddressDecoder ad (
 	.i_CPUSP(cpusp),
 	.i_AS_n(i_AS_n),
 	.i_RW(i_RW),
-	.i_LGEXP_n(i_LGEXP_n), 
+	.i_LGEXP_n(i_LGEXP_n),
+	.o_PPDTACK(PPDTACK), 
 	.o_DTACK_n(o_DTACK_n),
 	.o_WR(o_WR),	
 	.o_EVENRAM_n(o_EVENRAM_n),
@@ -77,12 +79,12 @@ AddressDecoder ad (
 	.o_EXPSEL_n(o_EXPSEL_n)
 	);
 
-DuartSel ds(
-	.i_A(i_A[19:6]),
-	.i_LDS_n(io_LDS_n),
-	.i_IOSEL_n(o_IOSEL_n),
-	.o_DUASEL_n(o_DUASEL_n)
-	);
+// DuartSel ds(
+// 	.i_A(i_A[19:6]),
+// 	.i_LDS_n(io_LDS_n),
+// 	.i_IOSEL_n(o_IOSEL_n),
+// 	.o_DUASEL_n(o_DUASEL_n)
+// 	);
 
 Glue g(
 	.i_A(i_A[19:19]),
@@ -98,23 +100,23 @@ Glue g(
 	.o_DUIACK_n(o_DUIACK_n)
 	);
 
-Watchdog w (
-	.i_CLK(i_CLK),
-	.i_A19(i_A[19]),
-	.i_CPUSP(cpusp),
-	.i_AS_n(i_AS_n),
-	.o_BERR_n(o_BERR_n)
-	);
+// Watchdog w (
+// 	.i_CLK(i_CLK),
+// 	.i_A19(i_A[19]),
+// 	.i_CPUSP(cpusp),
+// 	.i_AS_n(i_AS_n),
+// 	.o_BERR_n(o_BERR_n)
+// 	);
 
-CPUglue CPUG(
-	.i_CLK(i_CLK),
-	.i_A0(i_A0),
-	.i_DS_n(i_DS_n),
-	.i_SIZ(i_SIZ[1:0]),
-	.i_RESET_n(io_RESET_n),
-	.o_UDS_n(io_UDS_n),
-	.o_LDS_n(io_LDS_n), 
-	.o_E(o_E)
-);
+// CPUglue CPUG(
+// 	.i_CLK(i_CLK),
+// 	.i_A0(i_A0),
+// 	.i_DS_n(i_DS_n),
+// 	.i_SIZ(i_SIZ[1:0]),
+// 	.i_RESET_n(io_RESET_n),
+// 	.o_UDS_n(io_UDS_n),
+// 	.o_LDS_n(io_LDS_n), 
+// 	.o_E(o_E)
+// );
 
-endmodule;
+endmodule
