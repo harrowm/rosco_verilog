@@ -1,0 +1,368 @@
+Atmel ATF1504 Fitter Version 1918 ,running Tue Dec 03 17:42:54 2024
+
+
+
+
+fit1504
+-i Watchdog.edif
+-ifmt edif
+-o Watchdog.jed
+-lib Z:\Users\malcolm\atf15xx_yosys\vendor\aprim.lib
+-tech ATF1504AS
+-device PQFP
+-tpd 15
+
+****** Initial fitting strategy and property ******
+ Netlist_in_file = Watchdog.edif
+ Netlist_out_file = Watchdog.tt3
+ Jedec_file = Watchdog.jed
+ Log_file = Watchdog.fit
+ Device_name = PLCC44
+ Tech_name = ATF1504AS 
+ Package_type = PLCC
+ Preassignment = try 
+ Security_mode = OFF
+ Pin-Keeper = OFF
+ supporter = ABEL
+ optimize = ON
+ Xor_synthesis = OFF
+ Foldback_logic = OFF
+ Cascade_logic = OFF
+ Output_fast = ON
+ SSTL_input = off
+ *******************************
+ Power down pin 1 = OFF
+ Power down pin 2 = OFF
+ power_reset = OFF
+ JTAG = ON
+ TDI pullup = OFF
+ TMS pullup = OFF
+ MC_power = OFF
+ Open_collector = OFF
+ ITD0 = ON
+ ITD1 = ON
+ ITD2 = ON
+ Fast_inlatch = off
+ TPD = 15
+ Latch_synthesis = off 
+ Push_gate = on 
+ Verilog_sim = off 
+ VHDL_sim = off 
+ Out_Edif = off 
+ Logic Doubling = off 
+ ****** End of fitting strategy and property ******
+---------------------------------------------------------
+ Fitter_Pass 1, Preassign = KEEP, LOGIC_DOUBLING : OFF 
+ ... 
+
+Performing global Output Enable pin assignments ...
+
+Performing global pin assignments ...
+--------------------------------------
+
+
+
+Final global control pins assignment (if applicable)...
+-------------------------------------------------------
+i_CLK assigned to pin  43
+
+
+
+Performing input pin pre-assignments ...
+------------------------------------
+i_CLK assigned to pin  43
+
+Attempt to place floating signals ...
+------------------------------------
+i_A19 is placed at pin 12 (MC 1)
+id00035 is placed at feedback node 602 (MC 2)
+i_CPUSP is placed at pin 11 (MC 3)
+i_AS_n is placed at pin 9 (MC 4)
+id00033 is placed at feedback node 606 (MC 6)
+id00034 is placed at feedback node 607 (MC 7)
+TDI is placed at pin 7 (MC 8)
+id00032 is placed at feedback node 608 (MC 8)
+id00016Q is placed at feedback node 609 (MC 9)
+id00030 is placed at feedback node 610 (MC 10)
+id00022Q is placed at feedback node 611 (MC 11)
+id00031 is placed at feedback node 613 (MC 13)
+o_BERR_n is placed at pin 5 (MC 14)
+id00036 is placed at feedback node 615 (MC 15)
+pberr is placed at pin 4 (MC 16)
+TMS is placed at pin 13 (MC 32)
+TCK is placed at pin 32 (MC 48)
+TDO is placed at pin 38 (MC 56)
+
+                        o                             
+                        _                             
+                        B                             
+                        E  p              i           
+                        R  b              _           
+                        R  e  V           C  G        
+                     N  _  r  C  N  N  N  L  N  N  N  
+                     C  n  r  C  C  C  C  K  D  C  C  
+                 +------------------------------------+
+                 |   6  5  4  3  2  1 44 43 42 41 40  |
+              TDI| 7                               39 |NC
+               NC| 8                               38 |TDO
+           i_AS_n| 9                               37 |NC
+              GND| 10                              36 |NC
+          i_CPUSP| 11            ATF1504           35 |VCC
+            i_A19| 12         44-Lead PLCC         34 |NC
+              TMS| 13                              33 |NC
+               NC| 14                              32 |TCK
+              VCC| 15                              31 |NC
+               NC| 16                              30 |GND
+               NC| 17                              29 |NC
+                 |  18 19 20 21 22 23 24 25 26 27 28  |
+                 +------------------------------------+
+                     N  N  N  N  G  V  N  N  N  N  N  
+                     C  C  C  C  N  C  C  C  C  C  C  
+                                 D  C                 
+
+
+
+
+VCC = Supply Voltage pin for the device core
+
+GND = GND pin which must be connected to ground
+
+TMS,TDI,TDO,TDI = JTAG pins reserved for JTAG interface
+
+NC = Unused I/O pins which must be unconnected on the board
+
+Universal-Interconnect-Multiplexer assignments
+------------------------------------------------
+FanIn assignment for block A [13]
+{
+id00035,id00030,i_A19,id00016Q,i_CPUSP,i_AS_n,id00022Q,id00033,id00034,id00031,id00036,id00032,
+pberr,
+}
+Multiplexer assignment for block A
+id00035			(MC1	FB)  : MUX 0		Ref (A2fb)
+id00030			(MC6	FB)  : MUX 1		Ref (A10fb)
+i_A19			(MC11	P)   : MUX 3		Ref (A1p)
+id00016Q		(MC5	FB)  : MUX 5		Ref (A9fb)
+i_CPUSP			(MC12	P)   : MUX 7		Ref (A3p)
+i_AS_n			(MC13	P)   : MUX 9		Ref (A4p)
+id00022Q		(MC7	FB)  : MUX 11		Ref (A11fb)
+id00033			(MC2	FB)  : MUX 20		Ref (A6fb)
+id00034			(MC3	FB)  : MUX 22		Ref (A7fb)
+id00031			(MC8	FB)  : MUX 23		Ref (A13fb)
+id00036			(MC9	FB)  : MUX 31		Ref (A15fb)
+pberr			(MC10	P)   : MUX 36		Ref (A16p)
+id00032			(MC4	FB)  : MUX 38		Ref (A8fb)
+
+Creating JEDEC file Watchdog.jed ...
+
+PLCC44 programmed logic:
+-----------------------------------
+o_BERR_n = 0;
+
+id00016Q = ((id00032.Q & id00031.Q & id00030.Q & !id00036.Q)
+	# (id00032.Q & id00031.Q & id00030.Q & !id00034.Q)
+	# (id00032.Q & id00031.Q & id00030.Q & !id00033.Q)
+	# (id00032.Q & id00031.Q & id00030.Q & !id00035.Q));
+
+id00022Q = ((id00034.Q & id00033.Q & id00032.Q & id00031.Q & id00030.Q & !id00036.Q)
+	# (id00034.Q & id00033.Q & id00032.Q & id00031.Q & id00030.Q & !id00035.Q));
+
+pberr.D = (pberr.Q
+	# (id00034.Q & id00032.Q & id00030.Q & id00031.Q & id00033.Q & id00035.Q & id00036.Q & i_A19 & !i_CPUSP)
+	# (id00034.Q & id00032.Q & id00030.Q & id00031.Q & id00033.Q & id00035.Q & id00036.Q & !i_AS_n));
+
+id00030.D = ((id00034.Q & id00032.Q & id00031.Q & id00033.Q & id00035.Q & id00036.Q & !i_AS_n)
+	# (i_A19 & !i_CPUSP & !id00030.Q)
+	# (!i_AS_n & !id00030.Q)
+	# (i_A19 & !i_CPUSP & id00034.Q & id00032.Q & id00031.Q & id00033.Q & id00035.Q & id00036.Q));
+
+id00031.D = ((id00030.Q & i_A19 & !i_CPUSP & id00032.Q & id00033.Q & id00035.Q & id00036.Q & id00034.Q)
+	# (!id00031.Q & id00030.Q & !i_AS_n)
+	# (id00031.Q & !id00030.Q & i_A19 & !i_CPUSP)
+	# (id00031.Q & !id00030.Q & !i_AS_n)
+	# (id00031.Q & id00032.Q & id00033.Q & id00035.Q & id00036.Q & id00034.Q & !i_AS_n)
+	# (!id00031.Q & id00030.Q & i_A19 & !i_CPUSP));
+
+id00032.D = ((!id00016Q & i_A19 & !i_CPUSP & id00031.Q & id00030.Q)
+	# (!id00016Q & !i_AS_n & id00031.Q & id00030.Q)
+	# (!id00016Q & id00032.Q & i_A19 & !i_CPUSP)
+	# (!id00016Q & id00032.Q & !i_AS_n));
+
+id00033.D = ((!id00033.Q & id00016Q & !i_AS_n)
+	# (id00033.Q & !id00016Q & i_A19 & !i_CPUSP)
+	# (id00033.Q & !id00016Q & !i_AS_n)
+	# (!id00033.Q & id00016Q & i_A19 & !i_CPUSP));
+
+id00034.D = ((!id00022Q & id00034.Q & !i_AS_n)
+	# (!id00022Q & i_A19 & !i_CPUSP & id00033.Q & id00016Q)
+	# (!id00022Q & !i_AS_n & id00033.Q & id00016Q)
+	# (!id00022Q & i_A19 & !i_CPUSP & id00034.Q));
+
+id00035.D = ((id00022Q & !id00035.Q & i_A19 & !i_CPUSP)
+	# (id00022Q & !id00035.Q & !i_AS_n)
+	# (!id00022Q & id00035.Q & i_A19 & !i_CPUSP)
+	# (!id00022Q & id00035.Q & !i_AS_n));
+
+!id00036.D = ((!id00035.Q & !id00036.Q)
+	# (!id00036.Q & !id00022Q)
+	# (id00035.Q & id00036.Q & id00022Q)
+	# (i_AS_n & !i_A19)
+	# (i_AS_n & i_CPUSP));
+
+o_BERR_n.OE = pberr.Q;
+
+pberr.C = i_CLK;
+
+id00030.C = i_CLK;
+
+id00031.C = i_CLK;
+
+id00032.C = i_CLK;
+
+id00033.C = i_CLK;
+
+id00034.C = i_CLK;
+
+id00035.C = i_CLK;
+
+id00036.C = i_CLK;
+
+
+PLCC44 Pin/Node Placement:
+------------------------------------
+Pin 4  = pberr; /* MC 16 */
+Pin 5  = o_BERR_n; /* MC 14 */
+Pin 7  = TDI; /* MC 8 */
+Pin 9  = i_AS_n; /* MC 4 */
+Pin 11 = i_CPUSP; /* MC  3 */
+Pin 12 = i_A19; /* MC  1 */
+Pin 13 = TMS; /* MC 32 */ 
+Pin 32 = TCK; /* MC 48 */ 
+Pin 38 = TDO; /* MC 56 */ 
+Pin 43 = i_CLK;
+PINNODE 602 = id00035; /* MC 2 Feedback */
+PINNODE 606 = id00033; /* MC 6 Feedback */
+PINNODE 607 = id00034; /* MC 7 Feedback */
+PINNODE 608 = id00032; /* MC 8 Feedback */
+PINNODE 609 = id00016Q; /* MC 9 Feedback */
+PINNODE 610 = id00030; /* MC 10 Feedback */
+PINNODE 611 = id00022Q; /* MC 11 Feedback */
+PINNODE 613 = id00031; /* MC 13 Feedback */
+PINNODE 615 = id00036; /* MC 15 Feedback */
+
+** Resource Usage **
+
+
+DCERP Field = Summary of Allocations.
+|||||
+|||||_Preset [p,-]       ==  p = PT preset, - No Preset.
+||||
+||||__Reset [g,r,-]      ==  g= Global AR, r = PT reset, - No reset.
+|||
+|||___Clock Enable [e,-] ==  e = Product Term, - always enabled.
+||
+||____Clock [c,g,-],     ==  c = Product term, g = Global term, - No Clock.
+|
+|_____Type [C,D,L,T],    ==  Register type C= combin, D=dff, L=latch, T=tff.
+
+For input only = INPUT.
+
+
+SO Pin Options Field = Summary of Allocations.
+||
+||_OpenCol [o,-]      ==  o = Open Collector enabled, - CMOS drive.
+|
+|__Slew [s,f]         ==  Output Slew/Drive rate, s = slow/low, f = fast/hi drive.
+
+
+MCell Pin# Oe   PinDrive  DCERP  FBDrive  DCERP  Foldback  CascadeOut     TotPT SO
+MC1   12   --   i_A19     INPUT  --              --        --             0     f- 
+MC2   0         --               id00035  Dg---  --        --             4     f- 
+MC3   11   --   i_CPUSP   INPUT  --              --        --             0     f- 
+MC4   9    --   i_AS_n    INPUT  --              --        --             0     f- 
+MC5   8         --               --              --        --             0     f- 
+MC6   0         --               id00033  Dg---  --        --             4     f- 
+MC7   0         --               id00034  Dg---  --        --             4     f- 
+MC8   7    --   TDI       INPUT  id00032  Dg---  --        --             4     f- 
+MC9   0         --               id00016Q C----  --        --             4     f- 
+MC10  0         --               id00030  Dg---  --        --             4     f- 
+MC11  6         --               id00022Q C----  --        --             2     f- 
+MC12  0         --               --              --        -> id00031     5     f- 
+MC13  0         --               id00031  Dg---  --        --             1     f- 
+MC14  5    PT   o_BERR_n  C----  --              --        --             1     f- 
+MC15  0         --               id00036  Dg---  NA        --             5     f- 
+MC16  4    on   pberr     Dg---  --              --        --             3     f- 
+MC17  21        --               --              --        --             0     f- 
+MC18  0         --               --              --        --             0     f- 
+MC19  20        --               --              --        --             0     f- 
+MC20  19        --               --              --        --             0     f- 
+MC21  18        --               --              --        --             0     f- 
+MC22  0         --               --              --        --             0     f- 
+MC23  0         --               --              --        --             0     f- 
+MC24  17        --               --              --        --             0     f- 
+MC25  16        --               --              --        --             0     f- 
+MC26  0         --               --              --        --             0     f- 
+MC27  0         --               --              --        --             0     f- 
+MC28  0         --               --              --        --             0     f- 
+MC29  0         --               --              --        --             0     f- 
+MC30  14        --               --              --        --             0     f- 
+MC31  0         --               --              --        --             0     f- 
+MC32  13   --   TMS       INPUT  --              --        --             0     f- 
+MC33  24        --               --              --        --             0     f- 
+MC34  0         --               --              --        --             0     f- 
+MC35  25        --               --              --        --             0     f- 
+MC36  26        --               --              --        --             0     f- 
+MC37  27        --               --              --        --             0     f- 
+MC38  0         --               --              --        --             0     f- 
+MC39  0         --               --              --        --             0     f- 
+MC40  28        --               --              --        --             0     f- 
+MC41  29        --               --              --        --             0     f- 
+MC42  0         --               --              --        --             0     f- 
+MC43  0         --               --              --        --             0     f- 
+MC44  0         --               --              --        --             0     f- 
+MC45  0         --               --              --        --             0     f- 
+MC46  31        --               --              --        --             0     f- 
+MC47  0         --               --              --        --             0     f- 
+MC48  32   --   TCK       INPUT  --              --        --             0     f- 
+MC49  33        --               --              --        --             0     f- 
+MC50  0         --               --              --        --             0     f- 
+MC51  34        --               --              --        --             0     f- 
+MC52  36        --               --              --        --             0     f- 
+MC53  37        --               --              --        --             0     f- 
+MC54  0         --               --              --        --             0     f- 
+MC55  0         --               --              --        --             0     f- 
+MC56  38   --   TDO       C----  --              --        --             0     f- 
+MC57  39        --               --              --        --             0     f- 
+MC58  0         --               --              --        --             0     f- 
+MC59  0         --               --              --        --             0     f- 
+MC60  0         --               --              --        --             0     f- 
+MC61  0         --               --              --        --             0     f- 
+MC62  40        --               --              --        --             0     f- 
+MC63  0         --               --              --        --             0     f- 
+MC64  41        --               --              --        --             0     f- 
+MC0   2         --               --              --        --             0     f- 
+MC0   1         --               --              --        --             0     f- 
+MC0   44        --               --              --        --             0     f- 
+MC0   43        i_CLK     INPUT  --              --        --             0     f- 
+
+Logic Array Block			Macro Cells	I/O Pins	Foldbacks	TotalPT	FanIN		Cascades
+A: MC1	- MC16		11/16(68%)	6/16(37%)	0/16(0%)	41/80(51%)	13/40(32%)	1
+B: MC17	- MC32		0/16(0%)	1/16(6%)	0/16(0%)	0/80(0%)	0/40(0%)	0
+C: MC33	- MC48		0/16(0%)	1/16(6%)	0/16(0%)	0/80(0%)	0/40(0%)	0
+D: MC49	- MC64		1/16(6%)	1/16(6%)	0/16(0%)	0/80(0%)	0/40(0%)	0
+
+Total dedicated input used:	1/4 	(25%)
+Total I/O pins used		9/32 	(28%)
+Total Macro cells used 		13/64 	(20%)
+Total Flip-Flop used 		8/64 	(12%)
+Total Foldback logic used 	0/64 	(0%)
+Total Nodes+FB/MCells 		12/64 	(18%)
+Total cascade used 		1
+Total input pins 			7
+Total output pins 		3
+Total Pts 				41
+Creating pla file Watchdog.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
+
+----------------  End fitter, Design FITS
+$Device PLCC44 fits; JTAG ON; Secure OFF
+FIT1504 completed in 0.00 seconds

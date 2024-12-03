@@ -1,0 +1,20 @@
+CHIP "Watchdog" ASSIGNED TO AN PLCC44
+i_A19					: 12
+id00035					: 602
+i_CPUSP					: 11
+i_AS_n					: 9
+id00033					: 606
+id00034					: 607
+TDI					: 7
+id00032					: 608
+id00016Q					: 609
+id00030					: 610
+id00022Q					: 611
+id00031					: 613
+o_BERR_n					: 5
+id00036					: 615
+pberr					: 4
+TMS					: 13
+TCK					: 32
+TDO					: 38
+i_CLK					: 43

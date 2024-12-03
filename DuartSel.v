@@ -11,5 +11,5 @@ module DuartSel(
 	output o_DUASEL_n
 	);
 	
-	assign o_DUASEL_n = ~(i_A[19:6] == 14'b11111111111111 && ~i_LDS_n && ~i_IOSEL_n);
+	assign o_DUASEL_n = !(i_A[19:6] == 14'b11111111111111 && !i_LDS_n && !i_IOSEL_n);
 endmodule
