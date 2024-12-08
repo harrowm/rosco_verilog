@@ -1,17 +1,27 @@
 #$ TOOL ABEL Atmel 1504 1918
 #$ MODULE Glue
 #$ JEDECFILE Glue
-#$ PINS 15 o_CPUSP_n:5 o_DUIACK_n:4 o_RUNLED:6 o_BOOT:9 o_HALT_n:8 o_RESET_n:11 i_A:12 i_AS_n:43 i_A_LOW_2:21 i_A_LOW_1:20 i_A_LOW_0:19 i_FC_2:18 i_FC_1:17 i_FC_0:16 i_HWRST:44 
-#$ NODES 3 id00020:615 id00019:613 id00021:612 
+#$ PINS 15 o_CPUSP_n:36 o_DUIACK_n:4 o_RUNLED:24 o_HALT_n:18 o_RESET_n:20 o_BOOT:33 i_A:19 i_AS_n:41 i_A_LOW_2:21 i_A_LOW_1:25 i_A_LOW_0:27 i_FC_2:34 i_FC_1:12 i_FC_0:29 i_HWRST:37 
+#$ NODES 3 id00017:612 id00019:615 id00018:613 
 .type fr
-.i 9
+.i 13
 .o 15
-.ilb i_A i_AS_n i_A_LOW_2 i_A_LOW_1 i_A_LOW_0 i_FC_2 i_FC_1 i_FC_0 i_HWRST
-.ob o_CPUSP_n o_DUIACK_n o_RUNLED o_BOOT.D o_BOOT.C o_HALT_n o_HALT_n.OE o_RESET_n o_RESET_n.OE id00020.D id00020.C id00019.D id00019.C id00021.D id00021.C
-.p 5
---------0	~~1~~~~~~~~~~~~
------1110	0~~~~~~~~~~~~~~
-101001110	~0~~~~~~~~~~~~~
--1-------	~~~~1~~~~~1~1~1
---------1	~~~~~~1~1~~~~~~
+.ilb i_A i_AS_n i_A_LOW_2 i_A_LOW_1 i_A_LOW_0 i_FC_2 i_FC_1 i_FC_0 i_HWRST o_BOOT.Q id00017.Q id00018.Q id00019.Q
+.ob o_CPUSP_n o_DUIACK_n o_RUNLED o_HALT_n o_HALT_n.OE o_RESET_n o_RESET_n.OE o_BOOT.D o_BOOT.C id00017.D id00017.C id00019.D id00019.C id00018.D id00018.C
+.p 15
+--------1----	~~1~1~1~~~~~~~~
+-----1110----	0~~~~~~~~~~~~~~
+--------01---	~~~~~~~1~~~~~~~
+--------0-001	~~~~~~~1~~~~~~~
+--------011--	~~~~~~~~~1~~~~~
+--------000--	~~~~~~~~~1~~~~~
+--------0-0-1	~~~~~~~~~~~1~~~
+--------01--1	~~~~~~~~~~~1~~~
+--------00110	~~~~~~~~~~~1~~~
+--------0--01	~~~~~~~~~~~1~~~
+101001110----	~0~~~~~~~~~~~~~
+--------01-1-	~~~~~~~~~~~~~1~
+--------0010-	~~~~~~~~~~~~~1~
+--------0-01-	~~~~~~~~~~~~~1~
+-1-----------	~~~~~~~~1~1~1~1
 .end

@@ -27,20 +27,20 @@ yosys> stat
 === Glue ===
 
    Number of wires:                 36
-   Number of wire bits:             48
+   Number of wire bits:             50
    Number of public wires:          12
    Number of public wire bits:      18
    Number of ports:                 11
    Number of port bits:             15
    Number of memories:               0
    Number of memory bits:            0
-   Number of processes:              2
-   Number of cells:                 21
+   Number of processes:              3
+   Number of cells:                 19
      $add                            1
-     $eq                             4
+     $eq                             5
      $logic_and                      5
-     $logic_not                      8
-     $mux                            3
+     $logic_not                      6
+     $mux                            2
 
 
 yosys> tribuf
@@ -53,20 +53,19 @@ yosys> stat
 === Glue ===
 
    Number of wires:                 36
-   Number of wire bits:             48
+   Number of wire bits:             50
    Number of public wires:          12
    Number of public wire bits:      18
    Number of ports:                 11
    Number of port bits:             15
    Number of memories:               0
    Number of memory bits:            0
-   Number of processes:              2
-   Number of cells:                 21
+   Number of processes:              3
+   Number of cells:                 19
      $add                            1
-     $eq                             4
+     $eq                             5
      $logic_and                      5
-     $logic_not                      8
-     $mux                            1
+     $logic_not                      6
      $tribuf                         2
 
 
@@ -88,15 +87,18 @@ Removed 0 unused modules.
 Cleaned up 0 empty switches.
 
 6.2.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
-Marked 1 switch rules as full_case in process $proc$Glue.v:35$16 in module Glue.
+Marked 1 switch rules as full_case in process $proc$Glue.v:39$17 in module Glue.
 Removed a total of 0 dead cases.
 
 6.2.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
 Removed 0 redundant assignments.
-Promoted 1 assignment to connection.
+Promoted 3 assignments to connections.
 
 6.2.4. Executing PROC_INIT pass (extract init attributes).
-Found init rule in `\Glue.$proc$Glue.v:33$23'.
+Found init rule in `\Glue.$proc$Glue.v:0$22'.
+  Set init value: \o_BOOT = 1'0
+  Set init value: \counter = 3'000
+Found init rule in `\Glue.$proc$Glue.v:32$21'.
   Set init value: \counter = 3'000
 
 6.2.5. Executing PROC_ARST pass (detect async resets in processes).
@@ -106,30 +108,32 @@ Converted 0 switches.
 <suppressed ~3 debug messages>
 
 6.2.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
-Creating decoders for process `\Glue.$proc$Glue.v:33$23'.
-Creating decoders for process `\Glue.$proc$Glue.v:35$16'.
+Creating decoders for process `\Glue.$proc$Glue.v:0$22'.
+Creating decoders for process `\Glue.$proc$Glue.v:32$21'.
+Creating decoders for process `\Glue.$proc$Glue.v:39$17'.
      1/2: $0\counter[2:0]
      2/2: $0\o_BOOT[0:0]
 
 6.2.8. Executing PROC_DLATCH pass (convert process syncs to latches).
 
 6.2.9. Executing PROC_DFF pass (convert process syncs to FFs).
-Creating register for signal `\Glue.\o_BOOT' using process `\Glue.$proc$Glue.v:35$16'.
+Creating register for signal `\Glue.\o_BOOT' using process `\Glue.$proc$Glue.v:39$17'.
+  created $dff cell `$procdff$35' with positive edge clock.
+Creating register for signal `\Glue.\counter' using process `\Glue.$proc$Glue.v:39$17'.
   created $dff cell `$procdff$36' with positive edge clock.
-Creating register for signal `\Glue.\counter' using process `\Glue.$proc$Glue.v:35$16'.
-  created $dff cell `$procdff$37' with positive edge clock.
 
 6.2.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
 
 6.2.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
-Removing empty process `Glue.$proc$Glue.v:33$23'.
-Found and cleaned up 3 empty switches in `\Glue.$proc$Glue.v:35$16'.
-Removing empty process `Glue.$proc$Glue.v:35$16'.
+Removing empty process `Glue.$proc$Glue.v:0$22'.
+Removing empty process `Glue.$proc$Glue.v:32$21'.
+Found and cleaned up 3 empty switches in `\Glue.$proc$Glue.v:39$17'.
+Removing empty process `Glue.$proc$Glue.v:39$17'.
 Cleaned up 3 empty switches.
 
 6.2.12. Executing OPT_EXPR pass (perform const folding).
 Optimizing module Glue.
-<suppressed ~4 debug messages>
+<suppressed ~3 debug messages>
 
 6.3. Executing FLATTEN pass (flatten design).
 
@@ -152,17 +156,18 @@ Optimizing module Glue.
 
 6.7.2. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\Glue'.
-Removed a total of 0 cells.
+<suppressed ~9 debug messages>
+Removed a total of 3 cells.
 
 6.7.3. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
 Running muxtree optimizer on module \Glue..
   Creating internal representation of mux trees.
   Evaluating internal representation of mux trees.
-      Replacing known input bits on port B of cell $procmux$31: \o_BOOT -> 1'1
-      Replacing known input bits on port A of cell $procmux$29: \o_BOOT -> 1'0
+      Replacing known input bits on port B of cell $procmux$30: \o_BOOT -> 1'1
+      Replacing known input bits on port A of cell $procmux$28: \o_BOOT -> 1'0
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~3 debug messages>
+<suppressed ~2 debug messages>
 
 6.7.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \Glue.
@@ -176,11 +181,39 @@ Removed a total of 0 cells.
 
 6.7.7. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \Glue..
+Removed 0 unused cells and 3 unused wires.
+<suppressed ~1 debug messages>
 
 6.7.8. Executing OPT_EXPR pass (perform const folding).
 Optimizing module Glue.
 
-6.7.9. Finished OPT passes. (There is nothing left to do.)
+6.7.9. Rerunning OPT passes. (Maybe there is more to do..)
+
+6.7.10. Executing OPT_MUXTREE pass (detect dead branches in mux trees).
+Running muxtree optimizer on module \Glue..
+  Creating internal representation of mux trees.
+  Evaluating internal representation of mux trees.
+  Analyzing evaluation results.
+Removed 0 multiplexer ports.
+<suppressed ~2 debug messages>
+
+6.7.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
+  Optimizing cells in module \Glue.
+Performed a total of 0 changes.
+
+6.7.12. Executing OPT_MERGE pass (detect identical cells).
+Finding identical cells in module `\Glue'.
+Removed a total of 0 cells.
+
+6.7.13. Executing OPT_DFF pass (perform DFF optimizations).
+
+6.7.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \Glue..
+
+6.7.15. Executing OPT_EXPR pass (perform const folding).
+Optimizing module Glue.
+
+6.7.16. Finished OPT passes. (There is nothing left to do.)
 
 6.8. Executing FSM pass (extract and optimize FSM).
 
@@ -216,7 +249,7 @@ Running muxtree optimizer on module \Glue..
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~3 debug messages>
+<suppressed ~2 debug messages>
 
 6.9.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \Glue.
@@ -227,9 +260,9 @@ Finding identical cells in module `\Glue'.
 Removed a total of 0 cells.
 
 6.9.6. Executing OPT_DFF pass (perform DFF optimizations).
-Adding SRST signal on $procdff$37 ($dff) from module Glue (D = $procmux$24_Y, Q = \counter, rval = 3'000).
-Adding EN signal on $auto$ff.cc:266:slice$38 ($sdff) from module Glue (D = $add$Glue.v:41$21_Y, Q = \counter).
-Adding SRST signal on $procdff$36 ($dff) from module Glue (D = $procmux$31_Y, Q = \o_BOOT, rval = 1'0).
+Adding SRST signal on $procdff$36 ($dff) from module Glue (D = $procmux$23_Y, Q = \counter, rval = 3'000).
+Adding EN signal on $auto$ff.cc:266:slice$37 ($sdff) from module Glue (D = $add$Glue.v:46$19_Y, Q = \counter).
+Adding SRST signal on $procdff$35 ($dff) from module Glue (D = $procmux$30_Y, Q = \o_BOOT, rval = 1'0).
 
 6.9.7. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \Glue..
@@ -247,7 +280,7 @@ Running muxtree optimizer on module \Glue..
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~2 debug messages>
+<suppressed ~1 debug messages>
 
 6.9.11. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \Glue.
@@ -268,7 +301,7 @@ Optimizing module Glue.
 6.9.16. Finished OPT passes. (There is nothing left to do.)
 
 6.10. Executing WREDUCE pass (reducing word size of cells).
-Removed top 2 bits (of 3) from port B of cell Glue.$add$Glue.v:41$21 ($add).
+Removed top 2 bits (of 3) from port B of cell Glue.$add$Glue.v:46$19 ($add).
 
 6.11. Executing PEEPOPT pass (run peephole optimizers).
 
@@ -277,9 +310,9 @@ Finding unused cells or wires in module \Glue..
 
 6.13. Executing ALUMACC pass (create $alu and $macc cells).
 Extracting $alu and $macc cells in module Glue:
-  creating $macc model for $add$Glue.v:41$21 ($add).
-  creating $alu model for $macc $add$Glue.v:41$21.
-  creating $alu cell for $add$Glue.v:41$21: $auto$alumacc.cc:485:replace_alu$41
+  creating $macc model for $add$Glue.v:46$19 ($add).
+  creating $alu model for $macc $add$Glue.v:46$19.
+  creating $alu cell for $add$Glue.v:46$19: $auto$alumacc.cc:485:replace_alu$40
   created 1 $alu and 0 $macc cells.
 
 6.14. Executing SHARE pass (SAT-based resource sharing).
@@ -299,7 +332,7 @@ Running muxtree optimizer on module \Glue..
   Evaluating internal representation of mux trees.
   Analyzing evaluation results.
 Removed 0 multiplexer ports.
-<suppressed ~2 debug messages>
+<suppressed ~1 debug messages>
 
 6.15.4. Executing OPT_REDUCE pass (consolidate $*mux and $reduce_* inputs).
   Optimizing cells in module \Glue.
@@ -353,7 +386,7 @@ Finding unused cells or wires in module \Glue..
 
 6.18.1. Executing OPT_EXPR pass (perform const folding).
 Optimizing module Glue.
-<suppressed ~3 debug messages>
+<suppressed ~2 debug messages>
 
 6.18.2. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\Glue'.
@@ -437,21 +470,21 @@ Successfully finished Verilog frontend.
 
 6.21.2. Continuing TECHMAP pass.
 Using extmapper simplemap for cells of type $tribuf.
-Using extmapper simplemap for cells of type $not.
 Using extmapper simplemap for cells of type $logic_not.
 Using extmapper simplemap for cells of type $eq.
 Using extmapper simplemap for cells of type $logic_and.
+Using extmapper simplemap for cells of type $sdff.
 Using template $paramod$3ef7d3dd227da7627a99c5e5a6a4deb817573e39\_90_alu for cells of type $alu.
 Using extmapper simplemap for cells of type $or.
-Using extmapper simplemap for cells of type $sdff.
 Using extmapper simplemap for cells of type $sdffe.
 Using extmapper simplemap for cells of type $xor.
 Using extmapper simplemap for cells of type $and.
 Using template $paramod\_90_lcu_brent_kung\WIDTH=32'00000000000000000000000000000011 for cells of type $lcu.
 Using extmapper simplemap for cells of type $pos.
 Using extmapper simplemap for cells of type $mux.
+Using extmapper simplemap for cells of type $not.
 No more expansions possible.
-<suppressed ~235 debug messages>
+<suppressed ~231 debug messages>
 
 6.22. Executing OPT pass (performing simple optimizations).
 
@@ -461,14 +494,14 @@ Optimizing module Glue.
 
 6.22.2. Executing OPT_MERGE pass (detect identical cells).
 Finding identical cells in module `\Glue'.
-<suppressed ~9 debug messages>
-Removed a total of 3 cells.
+<suppressed ~6 debug messages>
+Removed a total of 2 cells.
 
 6.22.3. Executing OPT_DFF pass (perform DFF optimizations).
 
 6.22.4. Executing OPT_CLEAN pass (remove unused cells and wires).
 Finding unused cells or wires in module \Glue..
-Removed 2 unused cells and 36 unused wires.
+Removed 2 unused cells and 35 unused wires.
 <suppressed ~3 debug messages>
 
 6.22.5. Finished fast OPT passes.
@@ -486,8 +519,8 @@ Removed 0 unused modules.
 
 === Glue ===
 
-   Number of wires:                 38
-   Number of wire bits:             50
+   Number of wires:                 36
+   Number of wire bits:             48
    Number of public wires:          12
    Number of public wire bits:      18
    Number of ports:                 11
@@ -495,9 +528,9 @@ Removed 0 unused modules.
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
-   Number of cells:                 36
-     $_AND_                          6
-     $_NOT_                         15
+   Number of cells:                 33
+     $_AND_                          5
+     $_NOT_                         13
      $_OR_                           7
      $_SDFFE_PP0N_                   3
      $_SDFF_PP0_                     1
@@ -514,8 +547,8 @@ yosys> stat
 
 === Glue ===
 
-   Number of wires:                 38
-   Number of wire bits:             50
+   Number of wires:                 36
+   Number of wire bits:             48
    Number of public wires:          12
    Number of public wire bits:      18
    Number of ports:                 11
@@ -523,9 +556,9 @@ yosys> stat
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
-   Number of cells:                 36
-     $_AND_                          6
-     $_NOT_                         15
+   Number of cells:                 33
+     $_AND_                          5
+     $_NOT_                         13
      $_OR_                           7
      $_SDFFE_PP0N_                   3
      $_SDFF_PP0_                     1
@@ -571,8 +604,8 @@ yosys> stat
 
 === Glue ===
 
-   Number of wires:                 38
-   Number of wire bits:             50
+   Number of wires:                 36
+   Number of wire bits:             48
    Number of public wires:          12
    Number of public wire bits:      18
    Number of ports:                 11
@@ -580,9 +613,9 @@ yosys> stat
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
-   Number of cells:                 36
-     $_AND_                          6
-     $_NOT_                         15
+   Number of cells:                 33
+     $_AND_                          5
+     $_NOT_                         13
      $_OR_                           7
      $_SDFFE_PP0N_                   3
      $_SDFF_PP0_                     1
@@ -599,8 +632,8 @@ yosys> stat
 
 === Glue ===
 
-   Number of wires:                 38
-   Number of wire bits:             50
+   Number of wires:                 36
+   Number of wire bits:             48
    Number of public wires:          12
    Number of public wire bits:      18
    Number of ports:                 11
@@ -608,9 +641,9 @@ yosys> stat
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
-   Number of cells:                 36
-     $_AND_                          6
-     $_NOT_                         15
+   Number of cells:                 33
+     $_AND_                          5
+     $_NOT_                         13
      $_OR_                           7
      $_SDFFE_PP0N_                   3
      $_SDFF_PP0_                     1
@@ -654,8 +687,8 @@ yosys> stat
 
 === Glue ===
 
-   Number of wires:                 51
-   Number of wire bits:             63
+   Number of wires:                 49
+   Number of wire bits:             61
    Number of public wires:          12
    Number of public wire bits:      18
    Number of ports:                 11
@@ -663,10 +696,10 @@ yosys> stat
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
-   Number of cells:                 43
-     $_AND_                          6
+   Number of cells:                 40
+     $_AND_                          5
      $_MUX_                          7
-     $_NOT_                         15
+     $_NOT_                         13
      $_OR_                           7
      $_TBUF_                         2
      $_XOR_                          2
@@ -677,7 +710,7 @@ yosys> abc -liberty /Users/malcolm/atf15xx_yosys/cells.lib
 14. Executing ABC pass (technology mapping using ABC).
 
 14.1. Extracting gate netlist of module `\Glue' to `<abc-temp-dir>/input.blif'..
-Extracted 37 gates and 55 wires to a netlist network with 17 inputs and 7 outputs.
+Extracted 34 gates and 50 wires to a netlist network with 15 inputs and 6 outputs.
 
 14.1.1. Executing ABC.
 Running ABC command: "<yosys-exe-dir>/yosys-abc" -s -f <abc-temp-dir>/abc.script 2>&1
@@ -716,21 +749,17 @@ ABC: + &put
 ABC: + write_blif <abc-temp-dir>/output.blif 
 
 14.1.2. Re-integrating ABC results.
-ABC RESULTS:               INV cells:        1
-ABC RESULTS:            AND3I3 cells:        1
-ABC RESULTS:            AND2I1 cells:        1
-ABC RESULTS:           NAND2I1 cells:        1
-ABC RESULTS:           NAND3I1 cells:        1
-ABC RESULTS:           NAND2I2 cells:        4
-ABC RESULTS:              AND3 cells:        2
+ABC RESULTS:            AND2I1 cells:        2
+ABC RESULTS:            AND3I1 cells:        1
+ABC RESULTS:            AND3I3 cells:        3
 ABC RESULTS:             XNOR2 cells:        1
-ABC RESULTS:              AND2 cells:        2
+ABC RESULTS:            AND2I2 cells:        5
 ABC RESULTS:           NAND4I1 cells:        1
 ABC RESULTS:            AND3I2 cells:        1
 ABC RESULTS:           NAND4I2 cells:        1
-ABC RESULTS:        internal signals:       31
-ABC RESULTS:           input signals:       17
-ABC RESULTS:          output signals:        7
+ABC RESULTS:        internal signals:       29
+ABC RESULTS:           input signals:       15
+ABC RESULTS:          output signals:        6
 Removing temp directory.
 
 yosys> stat
@@ -739,8 +768,8 @@ yosys> stat
 
 === Glue ===
 
-   Number of wires:                 85
-   Number of wire bits:             97
+   Number of wires:                 79
+   Number of wire bits:             91
    Number of public wires:          12
    Number of public wire bits:      18
    Number of ports:                 11
@@ -748,18 +777,14 @@ yosys> stat
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
-   Number of cells:                 23
+   Number of cells:                 21
      $_TBUF_                         2
-     AND2                            2
-     AND2I1                          1
-     AND3                            2
+     AND2I1                          2
+     AND2I2                          5
+     AND3I1                          1
      AND3I2                          1
-     AND3I3                          1
+     AND3I3                          3
      DFF                             4
-     INV                             1
-     NAND2I1                         1
-     NAND2I2                         4
-     NAND3I1                         1
      NAND4I1                         1
      NAND4I2                         1
      XNOR2                           1
@@ -789,8 +814,8 @@ yosys> stat
 
 === Glue ===
 
-   Number of wires:                 96
-   Number of wire bits:            112
+   Number of wires:                 90
+   Number of wire bits:            106
    Number of public wires:          12
    Number of public wire bits:      18
    Number of ports:                 11
@@ -798,19 +823,15 @@ yosys> stat
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
-   Number of cells:                 36
-     AND2                            2
-     AND2I1                          1
-     AND3                            2
+   Number of cells:                 34
+     AND2I1                          2
+     AND2I2                          5
+     AND3I1                          1
      AND3I2                          1
-     AND3I3                          1
+     AND3I3                          3
      BUF                             4
      DFF                             4
      INBUF                           9
-     INV                             1
-     NAND2I1                         1
-     NAND2I2                         4
-     NAND3I1                         1
      NAND4I1                         1
      NAND4I2                         1
      TRI                             2
@@ -818,7 +839,7 @@ yosys> stat
 
 
 yosys> clean
-Removed 0 unused cells and 53 unused wires.
+Removed 0 unused cells and 49 unused wires.
 
 yosys> stat
 
@@ -826,8 +847,8 @@ yosys> stat
 
 === Glue ===
 
-   Number of wires:                 43
-   Number of wire bits:             51
+   Number of wires:                 41
+   Number of wire bits:             49
    Number of public wires:          12
    Number of public wire bits:      18
    Number of ports:                 11
@@ -835,19 +856,15 @@ yosys> stat
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
-   Number of cells:                 36
-     AND2                            2
-     AND2I1                          1
-     AND3                            2
+   Number of cells:                 34
+     AND2I1                          2
+     AND2I2                          5
+     AND3I1                          1
      AND3I2                          1
-     AND3I3                          1
+     AND3I3                          3
      BUF                             4
      DFF                             4
      INBUF                           9
-     INV                             1
-     NAND2I1                         1
-     NAND2I2                         4
-     NAND3I1                         1
      NAND4I1                         1
      NAND4I2                         1
      TRI                             2
@@ -870,8 +887,8 @@ yosys> stat
 
 === Glue ===
 
-   Number of wires:                 43
-   Number of wire bits:             51
+   Number of wires:                 41
+   Number of wire bits:             49
    Number of public wires:          12
    Number of public wire bits:      18
    Number of ports:                 11
@@ -879,19 +896,15 @@ yosys> stat
    Number of memories:               0
    Number of memory bits:            0
    Number of processes:              0
-   Number of cells:                 36
-     AND2                            2
-     AND2I1                          1
-     AND3                            2
+   Number of cells:                 34
+     AND2I1                          2
+     AND2I2                          5
+     AND3I1                          1
      AND3I2                          1
-     AND3I3                          1
+     AND3I3                          3
      BUF                             4
      DFF                             4
      INBUF                           9
-     INV                             1
-     NAND2I1                         1
-     NAND2I2                         4
-     NAND3I1                         1
      NAND4I1                         1
      NAND4I2                         1
      TRI                             2
@@ -914,6 +927,6 @@ yosys> write_edif -lsbidx Glue.edif
 yosys> exit
 
 Warnings: 2 unique messages, 2 total
-End of script. Logfile hash: 72d5b9c1ef, CPU: user 0.06s system 0.01s, MEM: 16.53 MB peak
+End of script. Logfile hash: 5abb0d471f, CPU: user 0.06s system 0.01s, MEM: 17.55 MB peak
 Yosys 0.47 (git sha1 647d61dd9, clang++ 16.0.0 -fPIC -O3)
-Time spent: 70% 1x abc (0 sec), 6% 15x opt_expr (0 sec), ...
+Time spent: 70% 1x abc (0 sec), 6% 16x opt_expr (0 sec), ...
