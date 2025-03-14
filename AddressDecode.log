@@ -1,0 +1,164 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2024  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.47 (git sha1 647d61dd9, clang++ 16.0.0 -fPIC -O3)
+
+yosys> read_liberty -lib /Users/malcolm/atf15xx_yosys/cells.lib
+
+1. Executing Liberty frontend: /Users/malcolm/atf15xx_yosys/cells.lib
+Imported 102 cell types from liberty file.
+
+yosys> read_verilog AddressDecode.v
+ERROR: Can't open input file `AddressDecode.v' for reading: No such file or directory
+
+yosys> stat
+
+2. Printing statistics.
+
+
+yosys> tribuf
+3. Executing TRIBUF pass.
+
+yosys> stat
+
+4. Printing statistics.
+
+
+yosys> synth -flatten -noabc -top AddressDecode
+5. Executing SYNTH pass.
+
+5.1. Executing HIERARCHY pass (managing design hierarchy).
+ERROR: Module `AddressDecode' not found!
+
+yosys> stat
+
+6. Printing statistics.
+
+
+yosys> techmap -map /Users/malcolm/atf15xx_yosys/techmap.v -D skip_DFFE_XX_
+7. Executing TECHMAP pass (map to technology primitives).
+
+7.1. Executing Verilog-2005 frontend: /Users/malcolm/atf15xx_yosys/techmap.v
+Parsing Verilog input from `/Users/malcolm/atf15xx_yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\$_DLATCH_P_'.
+Generating RTLIL representation for module `\$_DLATCH_N_'.
+Generating RTLIL representation for module `\$_DLATCH_NN0_'.
+Generating RTLIL representation for module `\$_DLATCH_NN1_'.
+Generating RTLIL representation for module `\$_DLATCH_NP0_'.
+Generating RTLIL representation for module `\$_DLATCH_NP1_'.
+Generating RTLIL representation for module `\$_DLATCH_PN0_'.
+Generating RTLIL representation for module `\$_DLATCH_PN1_'.
+Generating RTLIL representation for module `\$_DLATCH_PP0_'.
+Generating RTLIL representation for module `\$_DLATCH_PP1_'.
+Generating RTLIL representation for module `\$_DLATCHSR_NNN_'.
+Generating RTLIL representation for module `\$_DLATCHSR_NNP_'.
+Generating RTLIL representation for module `\$_DLATCHSR_NPN_'.
+Generating RTLIL representation for module `\$_DLATCHSR_NPP_'.
+Generating RTLIL representation for module `\$_DLATCHSR_PNN_'.
+Generating RTLIL representation for module `\$_DLATCHSR_PNP_'.
+Generating RTLIL representation for module `\$_DLATCHSR_PPN_'.
+Generating RTLIL representation for module `\$_DLATCHSR_PPP_'.
+Generating RTLIL representation for module `\$_DFFE_NN0P_'.
+Generating RTLIL representation for module `\$_DFFE_PP1P_'.
+Generating RTLIL representation for module `\$_DFFSRE_PPPP_'.
+Successfully finished Verilog frontend.
+
+7.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~23 debug messages>
+
+yosys> stat
+
+8. Printing statistics.
+
+
+yosys> simplemap
+9. Executing SIMPLEMAP pass (map simple cells to gate primitives).
+
+yosys> stat
+
+10. Printing statistics.
+
+
+yosys> dfflibmap -liberty /Users/malcolm/atf15xx_yosys/cells.lib
+11. Executing DFFLIBMAP pass (mapping DFF cells to sequential cells from liberty file).
+  cell DFF (noninv, pins=4, area=600.00) is a direct match for cell type $_DFF_P_.
+  cell DFFAR (noninv, pins=5, area=600.00) is a direct match for cell type $_DFF_PP0_.
+  cell DFFAS (noninv, pins=5, area=600.00) is a direct match for cell type $_DFF_PP1_.
+  cell DFFARS (noninv, pins=6, area=600.00) is a direct match for cell type $_DFFSR_PPP_.
+  final dff cell mappings:
+    unmapped dff cell: $_DFF_N_
+    \DFF _DFF_P_ (.CLK( C), .D( D), .Q( Q), .QN(~Q));
+    unmapped dff cell: $_DFF_NN0_
+    unmapped dff cell: $_DFF_NN1_
+    unmapped dff cell: $_DFF_NP0_
+    unmapped dff cell: $_DFF_NP1_
+    unmapped dff cell: $_DFF_PN0_
+    unmapped dff cell: $_DFF_PN1_
+    \DFFAR _DFF_PP0_ (.AR( R), .CLK( C), .D( D), .Q( Q), .QN(~Q));
+    \DFFAS _DFF_PP1_ (.AS( R), .CLK( C), .D( D), .Q( Q), .QN(~Q));
+    unmapped dff cell: $_DFFSR_NNN_
+    unmapped dff cell: $_DFFSR_NNP_
+    unmapped dff cell: $_DFFSR_NPN_
+    unmapped dff cell: $_DFFSR_NPP_
+    unmapped dff cell: $_DFFSR_PNN_
+    unmapped dff cell: $_DFFSR_PNP_
+    unmapped dff cell: $_DFFSR_PPN_
+    \DFFARS _DFFSR_PPP_ (.AR( R), .AS( S), .CLK( C), .D( D), .Q( Q), .QN(~Q));
+
+11.1. Executing DFFLEGALIZE pass (convert FFs to types supported by the target).
+
+yosys> stat
+
+12. Printing statistics.
+
+
+yosys> abc -liberty /Users/malcolm/atf15xx_yosys/cells.lib
+13. Executing ABC pass (technology mapping using ABC).
+
+yosys> stat
+
+14. Printing statistics.
+
+
+yosys> #hilomap -hicell VCC X -locell GND X
+
+yosys> #stat
+
+yosys> iopadmap -bits -inpad INBUF Q:A -outpad BUF A:Q -toutpad TRI ENA:A:Q -tinoutpad bibuf EN:Q:A:PAD
+15. Executing IOPADMAP pass (mapping inputs/outputs to IO-PAD cells).
+
+yosys> stat
+
+16. Printing statistics.
+
+
+yosys> clean
+
+yosys> stat
+17. Printing statistics.
+
+
+yosys> hierarchy
+18. Executing HIERARCHY pass (managing design hierarchy).
+
+yosys> stat
+
+19. Printing statistics.
+
+
+yosys> splitnets -format _
+20. Executing SPLITNETS pass (splitting up multi-bit signals).
+
+yosys> rename -wire -suffix _reg t:*DFF*
+
+yosys> rename -wire -suffix _comb
+
+yosys> #write_edif -attrprop AddressDecode.edif
+
+yosys> write_edif -lsbidx AddressDecode.edif
+
+21. Executing EDIF backend.

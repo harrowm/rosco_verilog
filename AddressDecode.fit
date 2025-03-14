@@ -1,0 +1,16 @@
+Atmel ATF1504 Fitter Version 1918 ,running Fri Jan 17 21:30:35 2025
+
+
+
+
+fit1504
+-i AddressDecode.edif
+-ifmt edif
+-o AddressDecode.jed
+-lib Z:\Users\malcolm\atf15xx_yosys\vendor\aprim.lib
+-tech ATF1504AS
+-device PLCC44
+-tpd 15
+-preassign keep
+Line 1. ( expected.
+Reading input file failed ...
