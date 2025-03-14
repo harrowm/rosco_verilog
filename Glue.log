@@ -927,6 +927,6 @@ yosys> write_edif -lsbidx Glue.edif
 yosys> exit
 
 Warnings: 2 unique messages, 2 total
-End of script. Logfile hash: 5abb0d471f, CPU: user 0.06s system 0.01s, MEM: 17.55 MB peak
+End of script. Logfile hash: 5abb0d471f, CPU: user 0.06s system 0.01s, MEM: 17.52 MB peak
 Yosys 0.47 (git sha1 647d61dd9, clang++ 16.0.0 -fPIC -O3)
 Time spent: 70% 1x abc (0 sec), 6% 16x opt_expr (0 sec), ...

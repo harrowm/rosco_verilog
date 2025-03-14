@@ -1,10 +1,10 @@
 CHIP "Glue" ASSIGNED TO AN PLCC44
 i_FC_1					: 12
+o_DUIACK_n					: 8
 TDI					: 7
 id00017					: 612
 id00018					: 613
 id00019					: 615
-o_DUIACK_n					: 4
 i_A_LOW_2					: 21
 o_RESET_n					: 20
 i_A					: 19

@@ -3,11 +3,11 @@ BEGIN
 
     DEVICE = "PLCC44";
     "i_FC_1"                                  : INPUT_PIN = 12 ;
+    "o_DUIACK_n"                              : OUTPUT_PIN = 8 ;
     "TDI"                                     : INPUT_PIN = 7 ;
     "id00017"                                 : NODE_NUM = 612 ;
     "id00018"                                 : NODE_NUM = 613 ;
     "id00019"                                 : NODE_NUM = 615 ;
-    "o_DUIACK_n"                              : OUTPUT_PIN = 4 ;
     "i_A_LOW_2"                               : INPUT_PIN = 21 ;
     "o_RESET_n"                               : OUTPUT_PIN = 20 ;
     "i_A"                                     : INPUT_PIN = 19 ;

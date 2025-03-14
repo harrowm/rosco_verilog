@@ -1593,6 +1593,13 @@
               (portRef Q (instanceRef id00003))
             )
           )
+          (net counter_1 (joined
+              (portRef A (instanceRef id00009))
+              (portRef AN (instanceRef id00010))
+              (portRef AN (instanceRef id00020))
+              (portRef Q (instanceRef id00018))
+            )
+          )
           (net (rename id00039 "$abc$263$i_HWRST") (joined
               (portRef A (instanceRef o_RUNLED_comb))
               (portRef AN (instanceRef id00005))
@@ -1609,6 +1616,11 @@
               (portRef B (instanceRef id00012))
               (portRef BN (instanceRef id00011))
               (portRef Q (instanceRef id00009))
+            )
+          )
+          (net counter_2 (joined
+              (portRef A (instanceRef id00012))
+              (portRef Q (instanceRef id00019))
             )
           )
           (net (rename id00041 "$auto$dfflibmap.cc:405:dfflibmap$262") (joined
@@ -1678,9 +1690,9 @@
               (portRef QN (instanceRef id00018))
             )
           )
-          (net counter_2 (joined
-              (portRef A (instanceRef id00012))
-              (portRef Q (instanceRef id00019))
+          (net (rename id00054 "$auto$alumacc.cc:485:replace_alu$40.X_0") (joined
+              (portRef BN (instanceRef id00006))
+              (portRef QN (instanceRef id00017))
             )
           )
           (net counter_0 (joined
@@ -1688,18 +1700,6 @@
               (portRef B (instanceRef id00009))
               (portRef BN (instanceRef id00007))
               (portRef Q (instanceRef id00017))
-            )
-          )
-          (net counter_1 (joined
-              (portRef A (instanceRef id00009))
-              (portRef AN (instanceRef id00010))
-              (portRef AN (instanceRef id00020))
-              (portRef Q (instanceRef id00018))
-            )
-          )
-          (net (rename id00054 "$auto$alumacc.cc:485:replace_alu$40.X_0") (joined
-              (portRef BN (instanceRef id00006))
-              (portRef QN (instanceRef id00017))
             )
           )
           (net (rename id00055 "$abc$263$new_n23") (joined

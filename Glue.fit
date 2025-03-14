@@ -1,4 +1,4 @@
-Atmel ATF1504 Fitter Version 1918 ,running Sun Dec 08 09:58:12 2024
+Atmel ATF1504 Fitter Version 1918 ,running Sat Jan 18 18:59:59 2025
 
 
 
@@ -11,6 +11,7 @@ fit1504
 -tech ATF1504AS
 -device PLCC44
 -tpd 15
+-preassign keep
 
 ****** Initial fitting strategy and property ******
  Netlist_in_file = Glue.edif
@@ -20,7 +21,7 @@ fit1504
  Device_name = PLCC44
  Tech_name = ATF1504AS 
  Package_type = PLCC
- Preassignment = try 
+ Preassignment = keep 
  Security_mode = OFF
  Pin-Keeper = OFF
  supporter = ABEL
@@ -75,11 +76,11 @@ Performing input pin pre-assignments ...
 Attempt to place floating signals ...
 ------------------------------------
 i_FC_1 is placed at pin 12 (MC 1)
+o_DUIACK_n is placed at pin 8 (MC 5)
 TDI is placed at pin 7 (MC 8)
 id00017 is placed at feedback node 612 (MC 12)
 id00018 is placed at feedback node 613 (MC 13)
 id00019 is placed at feedback node 615 (MC 15)
-o_DUIACK_n is placed at pin 4 (MC 16)
 i_A_LOW_2 is placed at pin 21 (MC 17)
 o_RESET_n is placed at pin 20 (MC 19)
 i_A is placed at pin 19 (MC 20)
@@ -97,20 +98,16 @@ i_HWRST is placed at pin 37 (MC 53)
 TDO is placed at pin 38 (MC 56)
 i_AS_n is placed at pin 41 (MC 64)
 
-                           o                          
-                           _                          
-                           D                          
-                           U                          
-                           I                    i     
-                           A                    _     
-                           C                    A     
-                           K  V              G  S     
-                     N  N  _  C  N  N  N  N  N  _  N  
-                     C  C  n  C  C  C  C  C  D  n  C  
+                                                i     
+                                                _     
+                                                A     
+                              V              G  S     
+                     N  N  N  C  N  N  N  N  N  _  N  
+                     C  C  C  C  C  C  C  C  D  n  C  
                  +------------------------------------+
                  |   6  5  4  3  2  1 44 43 42 41 40  |
               TDI| 7                               39 |NC
-               NC| 8                               38 |TDO
+       o_DUIACK_n| 8                               38 |TDO
                NC| 9                               37 |i_HWRST
               GND| 10                              36 |o_CPUSP_n
                NC| 11            ATF1504           35 |VCC
@@ -231,8 +228,8 @@ id00018.C = i_AS_n;
 
 PLCC44 Pin/Node Placement:
 ------------------------------------
-Pin 4  = o_DUIACK_n; /* MC 16 */
 Pin 7  = TDI; /* MC 8 */
+Pin 8  = o_DUIACK_n; /* MC 5 */
 Pin 12 = i_FC_1; /* MC  1 */
 Pin 13 = TMS; /* MC 32 */ 
 Pin 18 = o_HALT_n; /* MC 21 */ 
@@ -284,7 +281,7 @@ MC1   12   --   i_FC_1     INPUT  --              --        --             0    
 MC2   0         --                --              --        --             0     f- 
 MC3   11        --                --              --        --             0     f- 
 MC4   9         --                --              --        --             0     f- 
-MC5   8         --                --              --        --             0     f- 
+MC5   8    on   o_DUIACK_n C----  --              --        --             1     f- 
 MC6   0         --                --              --        --             0     f- 
 MC7   0         --                --              --        --             0     f- 
 MC8   7    --   TDI        INPUT  --              --        --             0     f- 
@@ -295,7 +292,7 @@ MC12  0         --                id00017  Dg---  --        --             2    
 MC13  0         --                id00018  Dg---  --        --             3     f- 
 MC14  5         --                --              --        --             0     f- 
 MC15  0         --                id00019  Dg---  --        --             4     f- 
-MC16  4    on   o_DUIACK_n C----  --              --        --             1     f- 
+MC16  4         --                --              --        --             0     f- 
 MC17  21   --   i_A_LOW_2  INPUT  --              --        --             0     f- 
 MC18  0         --                --              --        --             0     f- 
 MC19  20   OE5  o_RESET_n  C----  --              --        --             0     f- 

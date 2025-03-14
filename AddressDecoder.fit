@@ -1,4 +1,4 @@
-Atmel ATF1504 Fitter Version 1918 ,running Tue Dec 03 16:55:24 2024
+Atmel ATF1504 Fitter Version 1918 ,running Mon Jan 20 12:37:03 2025
 
 
 
@@ -9,8 +9,9 @@ fit1504
 -o AddressDecoder.jed
 -lib Z:\Users\malcolm\atf15xx_yosys\vendor\aprim.lib
 -tech ATF1504AS
--device PQFP
+-device PLCC44
 -tpd 15
+-preassign keep
 
 ****** Initial fitting strategy and property ******
  Netlist_in_file = AddressDecoder.edif
@@ -20,7 +21,7 @@ fit1504
  Device_name = PLCC44
  Tech_name = ATF1504AS 
  Package_type = PLCC
- Preassignment = try 
+ Preassignment = keep 
  Security_mode = OFF
  Pin-Keeper = OFF
  supporter = ABEL
@@ -54,6 +55,10 @@ fit1504
 ---------------------------------------------------------
  Fitter_Pass 1, Preassign = KEEP, LOGIC_DOUBLING : OFF 
  ... 
+ ## Warning : Placement fail 
+---------------------------------------------------------
+ Fitter_Pass 2, Preassign = KEEP, CASCADE_LOGIC : (TRY) 
+ ... 
 
 Performing global Output Enable pin assignments ...
 
@@ -74,70 +79,72 @@ o_DTACK_n.OE equation needs patching.
 
 Attempt to place floating signals ...
 ------------------------------------
-o_ODDROM_n is placed at pin 12 (MC 1)
-o_EVENROM_n is placed at pin 11 (MC 3)
-o_ODDRAM_n is placed at pin 9 (MC 4)
-o_EVENRAM_n is placed at pin 8 (MC 5)
+i_A_4 is placed at pin 12 (MC 1)
+i_AS_n is placed at pin 11 (MC 3)
 TDI is placed at pin 7 (MC 8)
-id00013Q is placed at feedback node 609 (MC 9)
-id00006Q is placed at feedback node 610 (MC 10)
-o_IOSEL_n is placed at pin 6 (MC 11)
-o_DTACK_n.OE is placed at feedback node 613 (MC 13)
-o_EXPSEL_n is placed at pin 5 (MC 14)
-PPDTACK is placed at pin 4 (MC 16)
-i_RW is placed at pin 21 (MC 17)
-i_LDS_n is placed at pin 20 (MC 19)
-i_UDS_n is placed at pin 19 (MC 20)
-i_LGEXP_n is placed at pin 18 (MC 21)
-i_CPUSP_n is placed at pin 17 (MC 24)
-o_WR is placed at pin 16 (MC 25)
-o_DTACK_n is placed at pin 14 (MC 30)
+id00014QN is placed at feedback node 608 (MC 8)
+XXL_70 is placed at feedback node 609 (MC 9)
+o_DTACK_n.OE is placed at feedback node 610 (MC 10)
+XXL_68 is placed at feedback node 612 (MC 12)
+XXL_69 is placed at feedback node 613 (MC 13)
+XXL_67 is placed at feedback node 615 (MC 15)
+o_WR is placed at pin 4 (MC 16)
+id00005Q is placed at foldback expander node 316 (MC 16)
+i_BOOT is placed at pin 21 (MC 17)
+o_EVENROM_n is placed at pin 20 (MC 19)
+i_LGEXP_n is placed at pin 19 (MC 20)
+o_ODDRAM_n is placed at pin 18 (MC 21)
+i_RW is placed at pin 17 (MC 24)
+o_EVENRAM_n is placed at pin 16 (MC 25)
 TMS is placed at pin 13 (MC 32)
-i_A_5 is placed at pin 24 (MC 33)
-i_A_4 is placed at pin 25 (MC 35)
-i_A_3 is placed at pin 26 (MC 36)
-i_A_2 is placed at pin 27 (MC 37)
-i_AS_n is placed at pin 28 (MC 40)
-i_A_0 is placed at pin 29 (MC 41)
-i_A_1 is placed at pin 31 (MC 46)
+FB_2_id00005Q is placed at foldback expander node 332 (MC 32)
+o_ODDROM_n is placed at pin 24 (MC 33)
+i_LDS_n is placed at pin 25 (MC 35)
+o_IOSEL_n is placed at pin 26 (MC 36)
+i_UDS_n is placed at pin 27 (MC 37)
+o_EXPSEL_n is placed at pin 28 (MC 40)
+i_A_5 is placed at pin 29 (MC 41)
+i_CPUSP_n is placed at pin 31 (MC 46)
 TCK is placed at pin 32 (MC 48)
-i_BOOT is placed at pin 33 (MC 49)
+PPDTACK is placed at pin 33 (MC 49)
+i_A_3 is placed at pin 34 (MC 51)
+o_DTACK_n is placed at pin 36 (MC 52)
+i_A_2 is placed at pin 37 (MC 53)
 TDO is placed at pin 38 (MC 56)
+i_A_1 is placed at pin 39 (MC 57)
+i_A_0 is placed at pin 41 (MC 64)
 
-                        o                             
-                     o  _                             
-                     _  E                             
-                     I  X  P                          
-                     O  P  P                          
-                     S  S  D                          
-                     E  E  T                          
-                     L  L  A  V              G        
-                     _  _  C  C  N  N  N  N  N  N  N  
-                     n  n  K  C  C  C  C  C  D  C  C  
+                                                i     
+                           o                    _     
+                           _  V              G  A     
+                     N  N  W  C  N  N  N  N  N  _  N  
+                     C  C  R  C  C  C  C  C  D  0  C  
                  +------------------------------------+
                  |   6  5  4  3  2  1 44 43 42 41 40  |
-              TDI| 7                               39 |NC
-      o_EVENRAM_n| 8                               38 |TDO
-       o_ODDRAM_n| 9                               37 |NC
-              GND| 10                              36 |NC
-      o_EVENROM_n| 11            ATF1504           35 |VCC
-       o_ODDROM_n| 12         44-Lead PLCC         34 |NC
-              TMS| 13                              33 |i_BOOT
-        o_DTACK_n| 14                              32 |TCK
-              VCC| 15                              31 |i_A_1
-             o_WR| 16                              30 |GND
-        i_CPUSP_n| 17                              29 |i_A_0
+              TDI| 7                               39 |i_A_1
+               NC| 8                               38 |TDO
+               NC| 9                               37 |i_A_2
+              GND| 10                              36 |o_DTACK_n
+           i_AS_n| 11            ATF1504           35 |VCC
+            i_A_4| 12         44-Lead PLCC         34 |i_A_3
+              TMS| 13                              33 |PPDTACK
+               NC| 14                              32 |TCK
+              VCC| 15                              31 |i_CPUSP_n
+      o_EVENRAM_n| 16                              30 |GND
+             i_RW| 17                              29 |i_A_5
                  |  18 19 20 21 22 23 24 25 26 27 28  |
                  +------------------------------------+
-                     i  i  i  i  G  V  i  i  i  i  i  
+                     o  i  o  i  G  V  o  i  o  i  o  
                      _  _  _  _  N  C  _  _  _  _  _  
-                     L  U  L  R  D  C  A  A  A  A  A  
-                     G  D  D  W        _  _  _  _  S  
-                     E  S  S           5  4  3  2  _  
-                     X  _  _                       n  
-                     P  n  n                          
-                     _                                
-                     n                                
+                     O  L  E  B  D  C  O  L  I  U  E  
+                     D  G  V  O        D  D  O  D  X  
+                     D  E  E  O        D  S  S  S  P  
+                     R  X  N  T        R  _  E  _  S  
+                     A  P  R           O  n  L  n  E  
+                     M  _  O           M     _     L  
+                     _  n  M           _     n     _  
+                     n     _           n           n  
+                           n                          
 
 
 
@@ -152,116 +159,203 @@ NC = Unused I/O pins which must be unconnected on the board
 
 Universal-Interconnect-Multiplexer assignments
 ------------------------------------------------
-FanIn assignment for block A [15]
+FanIn assignment for block A [16]
 {
-i_LGEXP_n,i_A_1,i_A_2,id00013Q,id00006Q,i_CPUSP_n,i_AS_n,i_BOOT,i_RW,i_A_5,i_A_4,i_LDS_n,i_A_0,i_UDS_n,i_A_3,
+XXL_70,XXL_69,
+i_A_4,i_CPUSP_n,i_UDS_n,i_AS_n,i_A_1,i_A_3,i_RW,i_A_0,id00014QN,i_BOOT,i_LDS_n,i_A_2,i_A_5,i_LGEXP_n,
 }
 Multiplexer assignment for block A
-i_LGEXP_n		(MC6	P)   : MUX 1		Ref (B21p)
-i_A_1			(MC14	P)   : MUX 2		Ref (C46p)
-i_A_2			(MC11	P)   : MUX 3		Ref (C37p)
-id00013Q		(MC1	FB)  : MUX 5		Ref (A9fb)
-id00006Q		(MC2	FB)  : MUX 7		Ref (A10fb)
-i_CPUSP_n		(MC7	P)   : MUX 13		Ref (B24p)
-i_AS_n			(MC12	P)   : MUX 15		Ref (C40p)
-i_BOOT			(MC15	P)   : MUX 17		Ref (D49p)
-i_RW			(MC3	P)   : MUX 21		Ref (B17p)
-i_A_5			(MC8	P)   : MUX 23		Ref (C33p)
-i_A_4			(MC9	P)   : MUX 25		Ref (C35p)
-i_LDS_n			(MC4	P)   : MUX 31		Ref (B19p)
-i_A_0			(MC13	P)   : MUX 32		Ref (C41p)
-i_UDS_n			(MC5	P)   : MUX 33		Ref (B20p)
-i_A_3			(MC10	P)   : MUX 35		Ref (C36p)
+i_A_4			(MC8	P)   : MUX 1		Ref (A1p)
+i_CPUSP_n		(MC5	P)   : MUX 2		Ref (C46p)
+i_UDS_n			(MC12	P)   : MUX 3		Ref (C37p)
+XXL_70			(MC2	FB)  : MUX 5		Ref (A9fb)
+i_AS_n			(MC4	P)   : MUX 7		Ref (A3p)
+i_A_1			(MC14	P)   : MUX 8		Ref (D57p)
+i_A_3			(MC10	P)   : MUX 9		Ref (D51p)
+i_RW			(MC11	P)   : MUX 15		Ref (B24p)
+i_A_0			(MC15	P)   : MUX 20		Ref (D64p)
+XXL_69			(MC3	FB)  : MUX 23		Ref (A13fb)
+id00014QN		(MC1	FB)  : MUX 24		Ref (A8fb)
+i_BOOT			(MC13	P)   : MUX 25		Ref (B17p)
+i_LDS_n			(MC6	P)   : MUX 27		Ref (C35p)
+i_A_2			(MC7	P)   : MUX 31		Ref (D53p)
+i_A_5			(MC9	P)   : MUX 32		Ref (C41p)
+i_LGEXP_n		(MC16	P)   : MUX 35		Ref (B20p)
 
-FanIn assignment for block B [2]
+FanIn assignment for block B [13]
 {
-i_RW,
-o_DTACK_n.OE,
+i_A_4,i_CPUSP_n,i_UDS_n,i_AS_n,i_A_1,i_A_3,i_RW,i_A_0,id00014QN,i_BOOT,i_LDS_n,i_A_2,i_A_5,
 }
 Multiplexer assignment for block B
-o_DTACK_n.OE		(MC1	FB)  : MUX 23		Ref (A13fb)
-i_RW			(MC2	P)   : MUX 25		Ref (B17p)
+i_A_4			(MC6	P)   : MUX 1		Ref (A1p)
+i_CPUSP_n		(MC3	P)   : MUX 2		Ref (C46p)
+i_UDS_n			(MC10	P)   : MUX 3		Ref (C37p)
+i_AS_n			(MC2	P)   : MUX 7		Ref (A3p)
+i_A_1			(MC12	P)   : MUX 8		Ref (D57p)
+i_A_3			(MC8	P)   : MUX 9		Ref (D51p)
+i_RW			(MC9	P)   : MUX 13		Ref (B24p)
+i_A_0			(MC13	P)   : MUX 20		Ref (D64p)
+id00014QN		(MC1	FB)  : MUX 24		Ref (A8fb)
+i_BOOT			(MC11	P)   : MUX 25		Ref (B17p)
+i_LDS_n			(MC4	P)   : MUX 27		Ref (C35p)
+i_A_2			(MC5	P)   : MUX 31		Ref (D53p)
+i_A_5			(MC7	P)   : MUX 32		Ref (C41p)
+
+FanIn assignment for block C [8]
+{
+i_A_4,i_CPUSP_n,i_AS_n,i_A_3,id00014QN,i_LDS_n,i_A_2,i_A_5,
+}
+Multiplexer assignment for block C
+i_A_4			(MC6	P)   : MUX 1		Ref (A1p)
+i_CPUSP_n		(MC3	P)   : MUX 2		Ref (C46p)
+i_AS_n			(MC2	P)   : MUX 7		Ref (A3p)
+i_A_3			(MC8	P)   : MUX 9		Ref (D51p)
+id00014QN		(MC1	FB)  : MUX 24		Ref (A8fb)
+i_LDS_n			(MC4	P)   : MUX 25		Ref (C35p)
+i_A_2			(MC5	P)   : MUX 31		Ref (D53p)
+i_A_5			(MC7	P)   : MUX 32		Ref (C41p)
+
+FanIn assignment for block D [14]
+{
+XXL_68,XXL_67,
+i_A_4,i_CPUSP_n,i_UDS_n,i_A_1,i_A_3,i_AS_n,i_RW,i_BOOT,i_LDS_n,i_A_2,i_A_5,
+o_DTACK_n.OE,
+}
+Multiplexer assignment for block D
+i_A_4			(MC8	P)   : MUX 1		Ref (A1p)
+i_CPUSP_n		(MC5	P)   : MUX 2		Ref (C46p)
+i_UDS_n			(MC12	P)   : MUX 3		Ref (C37p)
+o_DTACK_n.OE		(MC1	FB)  : MUX 7		Ref (A10fb)
+i_A_1			(MC14	P)   : MUX 8		Ref (D57p)
+i_A_3			(MC10	P)   : MUX 9		Ref (D51p)
+i_AS_n			(MC4	P)   : MUX 11		Ref (A3p)
+i_RW			(MC11	P)   : MUX 15		Ref (B24p)
+XXL_68			(MC2	FB)  : MUX 17		Ref (A12fb)
+i_BOOT			(MC13	P)   : MUX 25		Ref (B17p)
+i_LDS_n			(MC6	P)   : MUX 27		Ref (C35p)
+i_A_2			(MC7	P)   : MUX 31		Ref (D53p)
+i_A_5			(MC9	P)   : MUX 32		Ref (C41p)
+XXL_67			(MC3	FB)  : MUX 33		Ref (A15fb)
 
 Creating JEDEC file AddressDecoder.jed ...
 
 PLCC44 programmed logic:
 -----------------------------------
-o_WR = !i_RW;
+!id00005Q = (!i_A_2 & !i_A_4 & !i_A_5 & !i_A_3);
 
 o_DTACK_n = 0;
 
-id00006Q = ((!i_CPUSP_n & !i_AS_n & !i_A_3 & !i_A_2 & !i_A_5 & !i_A_4 & !i_A_0)
-	# (!i_CPUSP_n & !i_AS_n & !i_A_3 & !i_A_2 & !i_A_5 & !i_A_4 & !i_A_1)
-	# (!i_CPUSP_n & !i_AS_n & !i_A_3 & !i_A_2 & !i_A_5 & !i_A_4 & !i_RW)
-	# (!i_CPUSP_n & !i_AS_n & !i_A_3 & !i_A_2 & !i_A_5 & !i_A_4 & i_BOOT));
+o_WR = !i_RW;
 
-id00013Q = ((i_A_5 & i_A_4 & i_A_3 & !i_A_2 & !i_AS_n & !i_CPUSP_n)
-	# (!i_A_5 & !i_A_4 & !i_A_3 & !i_A_2 & !i_A_1 & !i_A_0 & !i_AS_n & !i_BOOT & !i_CPUSP_n & i_RW));
+id00014QN = ((!i_A_4 & !i_A_5 & !i_A_3 & !i_A_2 & !i_BOOT & !i_A_1 & !i_A_0 & i_RW)
+	# (i_A_4 & i_A_5 & i_A_3 & !i_A_2));
 
-!o_IOSEL_n = (i_A_5 & i_A_4 & i_A_3 & i_A_2 & !i_CPUSP_n);
+o_IOSEL_n = (!i_A_5
+	# !i_A_3
+	# !i_A_2
+	# !i_CPUSP_n
+	# !i_A_4);
 
-o_EXPSEL_n = ((!i_A_3 & !i_A_5 & !i_A_4 & !i_A_2)
-	# (i_A_3 & i_A_5 & i_A_4)
-	# i_CPUSP_n);
+o_EXPSEL_n = ((!i_A_2 & !i_A_4 & !i_A_5 & !i_A_3)
+	# (i_A_4 & i_A_5 & i_A_3)
+	# !i_CPUSP_n
+	# i_AS_n);
 
-!o_EVENRAM_n = (!i_UDS_n & id00006Q);
+o_EVENRAM_n = (!i_CPUSP_n
+	# i_AS_n
+	# i_UDS_n
+	# id00005Q
+	# (!i_BOOT & !i_A_1 & !i_A_0 & i_RW));
 
-!o_EVENROM_n = (!i_UDS_n & id00013Q);
+o_ODDRAM_n = (i_LDS_n
+	# id00005Q
+	# (!i_BOOT & !i_A_1 & !i_A_0 & i_RW)
+	# !i_CPUSP_n
+	# i_AS_n);
 
-!o_ODDRAM_n = (!i_LDS_n & id00006Q);
+o_EVENROM_n = (i_UDS_n
+	# !id00014QN
+	# !i_CPUSP_n
+	# i_AS_n);
 
-!o_ODDROM_n = (!i_LDS_n & id00013Q);
+o_ODDROM_n = (i_LDS_n
+	# !id00014QN
+	# !i_CPUSP_n
+	# i_AS_n);
 
-!PPDTACK = ((i_LDS_n & i_UDS_n & i_LGEXP_n)
-	# (i_CPUSP_n & !id00006Q & !id00013Q)
-	# (i_LGEXP_n & !id00006Q & !id00013Q)
-	# (i_LDS_n & i_UDS_n & !i_A_5 & !i_A_4 & !i_A_3 & !i_A_2)
-	# (!id00006Q & !id00013Q & !i_A_5 & !i_A_4 & !i_A_3 & !i_A_2)
-	# (i_LDS_n & i_UDS_n & i_A_5 & i_A_4 & i_A_3)
-	# (!id00006Q & !id00013Q & i_A_5 & i_A_4 & i_A_3)
-	# (i_CPUSP_n & i_LDS_n & i_UDS_n));
+PPDTACK = ((!i_AS_n & i_CPUSP_n & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3 & !i_RW & !i_UDS_n)
+	# (!i_AS_n & i_CPUSP_n & !i_LDS_n & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3 & i_BOOT)
+	# (!i_AS_n & i_CPUSP_n & !i_LDS_n & i_A_1 & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3)
+	# XXL_67
+	# XXL_68);
 
-!o_DTACK_n.OE = ((i_LDS_n & i_UDS_n & i_LGEXP_n)
-	# (i_CPUSP_n & !id00006Q & !id00013Q)
-	# (i_LGEXP_n & !id00006Q & !id00013Q)
-	# (i_LDS_n & i_UDS_n & !i_A_5 & !i_A_4 & !i_A_3 & !i_A_2)
-	# (!id00006Q & !id00013Q & !i_A_5 & !i_A_4 & !i_A_3 & !i_A_2)
-	# (i_LDS_n & i_UDS_n & i_A_5 & i_A_4 & i_A_3)
-	# (!id00006Q & !id00013Q & i_A_5 & i_A_4 & i_A_3)
-	# (i_CPUSP_n & i_LDS_n & i_UDS_n));
+XXL_67 = ((!i_AS_n & i_CPUSP_n & !i_LDS_n & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3 & i_A_0)
+	# (!i_AS_n & i_CPUSP_n & !i_LDS_n & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3 & !i_RW)
+	# (!i_AS_n & i_CPUSP_n & !i_UDS_n & id00014QN)
+	# (!i_AS_n & i_CPUSP_n & !i_LDS_n & id00014QN)
+	# (!i_AS_n & i_CPUSP_n & !i_A_4 & id00005Q & !i_LGEXP_n));
+
+XXL_68 = ((!i_AS_n & i_CPUSP_n & !i_A_5 & id00005Q & !i_LGEXP_n)
+	# (!i_AS_n & i_CPUSP_n & !i_A_3 & id00005Q & !i_LGEXP_n)
+	# (!i_AS_n & i_CPUSP_n & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3 & !i_UDS_n & i_BOOT)
+	# (!i_AS_n & i_CPUSP_n & i_A_1 & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3 & !i_UDS_n)
+	# (!i_AS_n & i_CPUSP_n & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3 & i_A_0 & !i_UDS_n));
+
+XXL_69 = ((!i_AS_n & i_CPUSP_n & !i_LDS_n & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3 & i_A_0)
+	# (!i_AS_n & i_CPUSP_n & !i_LDS_n & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3 & !i_RW)
+	# (!i_AS_n & i_CPUSP_n & !i_UDS_n & id00014QN)
+	# (!i_AS_n & i_CPUSP_n & !i_LDS_n & id00014QN)
+	# (!i_AS_n & i_CPUSP_n & !i_A_4 & id00005Q & !i_LGEXP_n));
+
+XXL_70 = ((!i_AS_n & i_CPUSP_n & !i_A_5 & id00005Q & !i_LGEXP_n)
+	# (!i_AS_n & i_CPUSP_n & !i_A_3 & id00005Q & !i_LGEXP_n)
+	# (!i_AS_n & i_CPUSP_n & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3 & !i_UDS_n & i_BOOT)
+	# (!i_AS_n & i_CPUSP_n & i_A_1 & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3 & !i_UDS_n)
+	# (!i_AS_n & i_CPUSP_n & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3 & i_A_0 & !i_UDS_n));
+
+o_DTACK_n.OE = ((!i_AS_n & i_CPUSP_n & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3 & !i_RW & !i_UDS_n)
+	# (!i_AS_n & i_CPUSP_n & !i_LDS_n & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3 & i_BOOT)
+	# (!i_AS_n & i_CPUSP_n & !i_LDS_n & i_A_1 & !i_A_2 & !i_A_4 & !i_A_5 & !i_A_3)
+	# XXL_69
+	# XXL_70);
 
 
 PLCC44 Pin/Node Placement:
 ------------------------------------
-Pin 4  = PPDTACK; /* MC 16 */
-Pin 5  = o_EXPSEL_n; /* MC 14 */
-Pin 6  = o_IOSEL_n; /* MC 11 */
+Pin 4  = o_WR; /* MC 16 */
 Pin 7  = TDI; /* MC 8 */
-Pin 8  = o_EVENRAM_n; /* MC 5 */
-Pin 9  = o_ODDRAM_n; /* MC 4 */
-Pin 11 = o_EVENROM_n; /* MC  3 */
-Pin 12 = o_ODDROM_n; /* MC  1 */
+Pin 11 = i_AS_n; /* MC  3 */
+Pin 12 = i_A_4; /* MC  1 */
 Pin 13 = TMS; /* MC 32 */ 
-Pin 14 = o_DTACK_n; /* MC 30 */ 
-Pin 16 = o_WR; /* MC 25 */ 
-Pin 17 = i_CPUSP_n; /* MC 24 */ 
-Pin 18 = i_LGEXP_n; /* MC 21 */ 
-Pin 19 = i_UDS_n; /* MC 20 */ 
-Pin 20 = i_LDS_n; /* MC 19 */ 
-Pin 21 = i_RW; /* MC 17 */ 
-Pin 24 = i_A_5; /* MC 33 */ 
-Pin 25 = i_A_4; /* MC 35 */ 
-Pin 26 = i_A_3; /* MC 36 */ 
-Pin 27 = i_A_2; /* MC 37 */ 
-Pin 28 = i_AS_n; /* MC 40 */ 
-Pin 29 = i_A_0; /* MC 41 */ 
-Pin 31 = i_A_1; /* MC 46 */ 
+Pin 16 = o_EVENRAM_n; /* MC 25 */ 
+Pin 17 = i_RW; /* MC 24 */ 
+Pin 18 = o_ODDRAM_n; /* MC 21 */ 
+Pin 19 = i_LGEXP_n; /* MC 20 */ 
+Pin 20 = o_EVENROM_n; /* MC 19 */ 
+Pin 21 = i_BOOT; /* MC 17 */ 
+Pin 24 = o_ODDROM_n; /* MC 33 */ 
+Pin 25 = i_LDS_n; /* MC 35 */ 
+Pin 26 = o_IOSEL_n; /* MC 36 */ 
+Pin 27 = i_UDS_n; /* MC 37 */ 
+Pin 28 = o_EXPSEL_n; /* MC 40 */ 
+Pin 29 = i_A_5; /* MC 41 */ 
+Pin 31 = i_CPUSP_n; /* MC 46 */ 
 Pin 32 = TCK; /* MC 48 */ 
-Pin 33 = i_BOOT; /* MC 49 */ 
+Pin 33 = PPDTACK; /* MC 49 */ 
+Pin 34 = i_A_3; /* MC 51 */ 
+Pin 36 = o_DTACK_n; /* MC 52 */ 
+Pin 37 = i_A_2; /* MC 53 */ 
 Pin 38 = TDO; /* MC 56 */ 
-PINNODE 609 = id00013Q; /* MC 9 Feedback */
-PINNODE 610 = id00006Q; /* MC 10 Feedback */
-PINNODE 613 = o_DTACK_n.OE; /* MC 13 Feedback */
+Pin 39 = i_A_1; /* MC 57 */ 
+Pin 41 = i_A_0; /* MC 64 */ 
+PINNODE 316 = id00005Q; /* MC 16 Foldback */
+PINNODE 332 = FB_2_id00005Q; /* MC 32 Foldback */
+PINNODE 608 = id00014QN; /* MC 8 Feedback */
+PINNODE 609 = XXL_70; /* MC 9 Feedback */
+PINNODE 610 = o_DTACK_n.OE; /* MC 10 Feedback */
+PINNODE 612 = XXL_68; /* MC 12 Feedback */
+PINNODE 613 = XXL_69; /* MC 13 Feedback */
+PINNODE 615 = XXL_67; /* MC 15 Feedback */
 
 ** Resource Usage **
 
@@ -288,92 +382,92 @@ SO Pin Options Field = Summary of Allocations.
 |__Slew [s,f]         ==  Output Slew/Drive rate, s = slow/low, f = fast/hi drive.
 
 
-MCell Pin# Oe   PinDrive    DCERP  FBDrive      DCERP  Foldback  CascadeOut      TotPT SO
-MC1   12   on   o_ODDROM_n  C----  --                  --        --              1     f- 
-MC2   0         --                 --                  --        --              0     f- 
-MC3   11   on   o_EVENROM_n C----  --                  --        --              1     f- 
-MC4   9    on   o_ODDRAM_n  C----  --                  --        --              1     f- 
-MC5   8    on   o_EVENRAM_n C----  --                  --        --              1     f- 
-MC6   0         --                 --                  --        --              0     f- 
-MC7   0         --                 --                  --        --              0     f- 
-MC8   7    --   TDI         INPUT  --                  --        --              0     f- 
-MC9   0         --                 id00013Q     C----  --        --              2     f- 
-MC10  0         --                 id00006Q     C----  --        --              4     f- 
-MC11  6    on   o_IOSEL_n   C----  --                  --        --              1     f- 
-MC12  0         --                 --                  --        -> o_DTACK_n.OE 5     f- 
-MC13  0         --                 o_DTACK_n.OE C----  --        --              3     f- 
-MC14  5    on   o_EXPSEL_n  C----  --                  --        --              3     f- 
-MC15  0         --                 --                  --        -> PPDTACK      5     f- 
-MC16  4    on   PPDTACK     C----  --                  --        --              3     f- 
-MC17  21   --   i_RW        INPUT  --                  --        --              0     f- 
-MC18  0         --                 --                  --        --              0     f- 
-MC19  20   --   i_LDS_n     INPUT  --                  --        --              0     f- 
-MC20  19   --   i_UDS_n     INPUT  --                  --        --              0     f- 
-MC21  18   --   i_LGEXP_n   INPUT  --                  --        --              0     f- 
-MC22  0         --                 --                  --        --              0     f- 
-MC23  0         --                 --                  --        --              0     f- 
-MC24  17   --   i_CPUSP_n   INPUT  --                  --        --              0     f- 
-MC25  16   on   o_WR        C----  --                  --        --              1     f- 
-MC26  0         --                 --                  --        --              0     f- 
-MC27  0         --                 --                  --        --              0     f- 
-MC28  0         --                 --                  --        --              0     f- 
-MC29  0         --                 --                  --        --              0     f- 
-MC30  14   PT   o_DTACK_n   C----  --                  --        --              1     f- 
-MC31  0         --                 --                  --        --              0     f- 
-MC32  13   --   TMS         INPUT  --                  --        --              0     f- 
-MC33  24   --   i_A_5       INPUT  --                  --        --              0     f- 
-MC34  0         --                 --                  --        --              0     f- 
-MC35  25   --   i_A_4       INPUT  --                  --        --              0     f- 
-MC36  26   --   i_A_3       INPUT  --                  --        --              0     f- 
-MC37  27   --   i_A_2       INPUT  --                  --        --              0     f- 
-MC38  0         --                 --                  --        --              0     f- 
-MC39  0         --                 --                  --        --              0     f- 
-MC40  28   --   i_AS_n      INPUT  --                  --        --              0     f- 
-MC41  29   --   i_A_0       INPUT  --                  --        --              0     f- 
-MC42  0         --                 --                  --        --              0     f- 
-MC43  0         --                 --                  --        --              0     f- 
-MC44  0         --                 --                  --        --              0     f- 
-MC45  0         --                 --                  --        --              0     f- 
-MC46  31   --   i_A_1       INPUT  --                  --        --              0     f- 
-MC47  0         --                 --                  --        --              0     f- 
-MC48  32   --   TCK         INPUT  --                  --        --              0     f- 
-MC49  33   --   i_BOOT      INPUT  --                  --        --              0     f- 
-MC50  0         --                 --                  --        --              0     f- 
-MC51  34        --                 --                  --        --              0     f- 
-MC52  36        --                 --                  --        --              0     f- 
-MC53  37        --                 --                  --        --              0     f- 
-MC54  0         --                 --                  --        --              0     f- 
-MC55  0         --                 --                  --        --              0     f- 
-MC56  38   --   TDO         C----  --                  --        --              0     f- 
-MC57  39        --                 --                  --        --              0     f- 
-MC58  0         --                 --                  --        --              0     f- 
-MC59  0         --                 --                  --        --              0     f- 
-MC60  0         --                 --                  --        --              0     f- 
-MC61  0         --                 --                  --        --              0     f- 
-MC62  40        --                 --                  --        --              0     f- 
-MC63  0         --                 --                  --        --              0     f- 
-MC64  41        --                 --                  --        --              0     f- 
-MC0   2         --                 --                  --        --              0     f- 
-MC0   1         --                 --                  --        --              0     f- 
-MC0   44        --                 --                  --        --              0     f- 
-MC0   43        --                 --                  --        --              0     f- 
+MCell Pin# Oe   PinDrive    DCERP  FBDrive      DCERP  Foldback      CascadeOut     TotPT SO
+MC1   12   --   i_A_4       INPUT  --                  --            --             0     f- 
+MC2   0         --                 --                  --            --             0     f- 
+MC3   11   --   i_AS_n      INPUT  --                  --            --             0     f- 
+MC4   9         --                 --                  --            --             0     f- 
+MC5   8         --                 --                  --            --             0     f- 
+MC6   0         --                 --                  --            --             0     f- 
+MC7   0         --                 --                  --            --             0     f- 
+MC8   7    --   TDI         INPUT  id00014QN    C----  --            --             2     f- 
+MC9   0         --                 XXL_70       C----  NA            --             5     f- 
+MC10  0         --                 o_DTACK_n.OE C----  NA            --             5     f- 
+MC11  6         --                 --                  --            --             0     f- 
+MC12  0         --                 XXL_68       C----  NA            --             5     f- 
+MC13  0         --                 XXL_69       C----  NA            --             5     f- 
+MC14  5         --                 --                  --            --             0     f- 
+MC15  0         --                 XXL_67       C----  NA            --             5     f- 
+MC16  4    on   o_WR        C----  --                  id00005Q      --             2     f- 
+MC17  21   --   i_BOOT      INPUT  --                  --            --             0     f- 
+MC18  0         --                 --                  --            --             0     f- 
+MC19  20   on   o_EVENROM_n C----  --                  --            --             4     f- 
+MC20  19   --   i_LGEXP_n   INPUT  --                  --            --             0     f- 
+MC21  18   on   o_ODDRAM_n  C----  --                  NA            --             5     f- 
+MC22  0         --                 --                  --            --             0     f- 
+MC23  0         --                 --                  --            --             0     f- 
+MC24  17   --   i_RW        INPUT  --                  --            --             0     f- 
+MC25  16   on   o_EVENRAM_n C----  --                  NA            --             5     f- 
+MC26  0         --                 --                  --            --             0     f- 
+MC27  0         --                 --                  --            --             0     f- 
+MC28  0         --                 --                  --            --             0     f- 
+MC29  0         --                 --                  --            --             0     f- 
+MC30  14        --                 --                  --            --             0     f- 
+MC31  0         --                 --                  --            --             0     f- 
+MC32  13   --   TMS         INPUT  --                  FB_2_id00005Q --             1     f- 
+MC33  24   on   o_ODDROM_n  C----  --                  --            --             4     f- 
+MC34  0         --                 --                  --            --             0     f- 
+MC35  25   --   i_LDS_n     INPUT  --                  --            --             0     f- 
+MC36  26   on   o_IOSEL_n   C----  --                  NA            --             5     f- 
+MC37  27   --   i_UDS_n     INPUT  --                  --            --             0     f- 
+MC38  0         --                 --                  --            --             0     f- 
+MC39  0         --                 --                  --            --             0     f- 
+MC40  28   on   o_EXPSEL_n  C----  --                  --            --             4     f- 
+MC41  29   --   i_A_5       INPUT  --                  --            --             0     f- 
+MC42  0         --                 --                  --            --             0     f- 
+MC43  0         --                 --                  --            --             0     f- 
+MC44  0         --                 --                  --            --             0     f- 
+MC45  0         --                 --                  --            --             0     f- 
+MC46  31   --   i_CPUSP_n   INPUT  --                  --            --             0     f- 
+MC47  0         --                 --                  --            --             0     f- 
+MC48  32   --   TCK         INPUT  --                  --            --             0     f- 
+MC49  33   on   PPDTACK     C----  --                  NA            --             5     f- 
+MC50  0         --                 --                  --            --             0     f- 
+MC51  34   --   i_A_3       INPUT  --                  --            --             0     f- 
+MC52  36   PT   o_DTACK_n   C----  --                  --            --             1     f- 
+MC53  37   --   i_A_2       INPUT  --                  --            --             0     f- 
+MC54  0         --                 --                  --            --             0     f- 
+MC55  0         --                 --                  --            --             0     f- 
+MC56  38   --   TDO         C----  --                  --            --             0     f- 
+MC57  39   --   i_A_1       INPUT  --                  --            --             0     f- 
+MC58  0         --                 --                  --            --             0     f- 
+MC59  0         --                 --                  --            --             0     f- 
+MC60  0         --                 --                  --            --             0     f- 
+MC61  0         --                 --                  --            --             0     f- 
+MC62  40        --                 --                  --            --             0     f- 
+MC63  0         --                 --                  --            --             0     f- 
+MC64  41   --   i_A_0       INPUT  --                  --            --             0     f- 
+MC0   2         --                 --                  --            --             0     f- 
+MC0   1         --                 --                  --            --             0     f- 
+MC0   44        --                 --                  --            --             0     f- 
+MC0   43        --                 --                  --            --             0     f- 
 
 Logic Array Block			Macro Cells	I/O Pins	Foldbacks	TotalPT	FanIN		Cascades
-A: MC1	- MC16		10/16(62%)	8/16(50%)	0/16(0%)	30/80(37%)	15/40(37%)	2
-B: MC17	- MC32		2/16(12%)	8/16(50%)	0/16(0%)	2/80(2%)	2/40(5%)	0
-C: MC33	- MC48		0/16(0%)	8/16(50%)	0/16(0%)	0/80(0%)	0/40(0%)	0
-D: MC49	- MC64		1/16(6%)	2/16(12%)	0/16(0%)	0/80(0%)	0/40(0%)	0
+A: MC1	- MC16		7/16(43%)	4/16(25%)	1/16(6%)	29/80(36%)	16/40(40%)	0
+B: MC17	- MC32		3/16(18%)	7/16(43%)	1/16(6%)	15/80(18%)	13/40(32%)	0
+C: MC33	- MC48		3/16(18%)	8/16(50%)	0/16(0%)	13/80(16%)	8/40(20%)	0
+D: MC49	- MC64		3/16(18%)	7/16(43%)	0/16(0%)	6/80(7%)	14/40(35%)	0
 
 Total dedicated input used:	0/4 	(0%)
 Total I/O pins used		26/32 	(81%)
-Total Macro cells used 		15/64 	(23%)
+Total Macro cells used 		16/64 	(25%)
 Total Flip-Flop used 		0/64 	(0%)
-Total Foldback logic used 	0/64 	(0%)
-Total Nodes+FB/MCells 		13/64 	(20%)
-Total cascade used 		2
+Total Foldback logic used 	2/64 	(3%)
+Total Nodes+FB/MCells 		18/64 	(28%)
+Total cascade used 		0
 Total input pins 			16
 Total output pins 		10
-Total Pts 				32
+Total Pts 				63
 Creating pla file AddressDecoder.tt3 with 0 inputs 0 outputs, 0 pins 0 nodes and 0 pterms...
 
 ----------------  End fitter, Design FITS

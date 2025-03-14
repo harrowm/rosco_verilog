@@ -58,7 +58,9 @@ endmodule
 //NC 39
 //PIN: i_HWRST    : 37
 //PIN: i_FC_2     : 34
-//xPIN: i_FC_1     : 32 // Cant fit, let fitter decide
+//PIN: i_FC_1     : 12 
+// Cant fit on 32 clashes with TCK
+
 //PIN: i_FC_0     : 29
 //PIN: i_A_LOW_0  : 27
 //PIN: i_A_LOW_1  : 25
@@ -68,7 +70,9 @@ endmodule
 //GND 14
 //---
 //VCC 40
-//xPIN: o_DUIACK_n : 38 // Cant fit, let fitter decide
+//PIN: o_DUIACK_n : 8 
+// Cant fit on 38 clashes with TDO
+
 //PIN: o_CPUSP_n  : 36
 //PIN: o_BOOT     : 33
 //NC 31
@@ -78,8 +82,9 @@ endmodule
 //PIN: o_RESET_n  : 20
 //PIN: o_HALT_n   : 18
 //NC 16
-//NC 13
+// Cant fit on 13 clashes with TMS
 
+//NC 11
 
 // Pin assignments from the 22v10 design
 //    1   | AS       | Clock/Input
